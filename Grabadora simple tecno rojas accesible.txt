@@ -7,4 +7,4 @@ A continuación les menciono algunos pequeños cambios.
 Se añadió la capacidad de que únicamente se muestre en los spinners la cantidad de bits y gigahercios compatibles para cada formato; esto sucederá según el formato que se elija.
 Esta implementación fue con la importancia de no seleccionar una cantidad incompatible al momento de elegir otro formato de audio.
 Sin nada más que decirles, que lo disfruten. Ahora no olviden apoyar mi contenido suscribiéndose a mi canal de Telegram a través de los botones disponibles dentro de la configuración de la grabadora.
-https://drive.usercontent.google.com/download?id=1HcEQfsEtttOcKhvmIxLR156jjtZupIm4&export=download&confirm=t
+https://drive.usercontent.google.com/download?id=1szm3fJDCJ24E_fZ0_xHT_fx2U27SPH2y&export=download&confirm=t
