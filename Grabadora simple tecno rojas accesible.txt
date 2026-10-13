@@ -1,4 +1,4 @@
-1/31/2026
+10/13/2026
 Estoy probando las actualizaciones automáticas para la grabadora simple.
 Por fin, gente, las actualizaciones automáticas están integradas para el complemento Grabadora Simple.
 De esta manera no tendrán que estar buscando una nueva versión en ninguna otra parte, porque únicamente tendrán que ejecutar el complemento para que les muestre la actualización disponible y, de esta manera, puedan disfrutar de las novedades o cambios que se incluyan en futuras actualizaciones.
@@ -7,4 +7,4 @@ A continuación les menciono algunos pequeños cambios.
 Se añadió la capacidad de que únicamente se muestre en los spinners la cantidad de bits y gigahercios compatibles para cada formato; esto sucederá según el formato que se elija.
 Esta implementación fue con la importancia de no seleccionar una cantidad incompatible al momento de elegir otro formato de audio.
 Sin nada más que decirles, que lo disfruten. Ahora no olviden apoyar mi contenido suscribiéndose a mi canal de Telegram a través de los botones disponibles dentro de la configuración de la grabadora.
-https://drive.usercontent.google.com/download?id=1szm3fJDCJ24E_fZ0_xHT_fx2U27SPH2y&export=download&confirm=t
+https://drive.usercontent.google.com/download?id=1IbLJU38lUN74Wtk40jNI1BocaiD82y-B&export=download&confirm=t
