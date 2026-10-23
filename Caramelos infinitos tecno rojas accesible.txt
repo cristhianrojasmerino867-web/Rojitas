@@ -1,22 +1,14 @@
-21/10/2026
+23/10/2026
 Bienvenido a caramelos infinitos.
 Desarrollador del juego, Cristhian rojas.
 Anteriormente, este juego había sido presentado como herramienta, pero ahora viene como plugin, esto para brindar una mayor accesibilidad en todo momento que se desee al juego, ya que, para disponer de él en modo herramienta, se debe ingresar al lector de pantalla; en cambio, ahora ya no tendrás que estar entrando a cada rato al lector de pantalla cada vez que quieras continuar tus partidas.
 Se agregaron las actualizaciones automáticas; de esta manera, cuando salga una nueva versión, disfrutarás de este juego.
 Siempre tendrás nuevas funciones a la mano cuando estén disponibles.
-Versión anterior 1.0, versión actual 1.1.
+Versión anterior 1.1, versión actual 1.2.
 Se añadió la posibilidad de crear tu nombre de usuario al ejecutar, por primera vez, el juego.
-Esto es importante para almacenar tu clasificación. Cuando vayas a poner tu nombre de usuario, también se te solicitará ingresar tu país al cual perteneces.
-Se añadió el botón enviar comentario para escribir un comentario, ya sea como sugerencia o calificación.
-Se añadió la opción leer comentarios para poder leer un comentario o los comentarios que dejen los jugadores.
-Se añadió el botón “Ver estadísticas”. Este botón te servirá para ver la clasificación por país o top 100. Si pulsas la opción top 100, te permitirá ver quiénes han pasado los 100 000 caramelos para arriba.
-Si pulsas la opción por país, te mostrará la lista de países según los usuarios que se hayan registrado; al pulsarlo, te mostrará el nombre de usuario más su puntuación que tenga.
-Se añadió una barra deslizante junto al botón que anteriormente se llamaba “usar efectos de sonido”, ahora renombrado a “usar efecto de sonido”, en la interfaz principal.
-La barra deslizante permite controlar el volumen de la música de la interfaz principal, así como en la pantalla del juego.
-Se añadió un botón llamado usar efectos al jugar. Este botón permite utilizar efectos de sonido al momento de pulsar la cantidad de caramelos o de cartas, es decir, al momento de la jugabilidad.
-Se añadió su barra deslizante al costado, también para poder controlar el volumen de estos sonidos.
-Se añadió un botón para activar o desactivar la vibración del juego.
-Al costado se añadió un menú en el cual podrá seleccionar, desde suave hasta muy fuerte, la vibración del juego.
-Debo mencionar que estas opciones de barras deslizantes, así como el menú de la vibración, estarán disponibles solo cuando estas opciones estén activadas; cuando se desactiven, se ocultarán estas opciones.
-Por favor, usen con mucha responsabilidad el botón de enviar comentario, para que no se sature el servidor, ya que yo lo tendré en mantenimiento.
-https://drive.usercontent.google.com/download?id=1i0AkYsTEuunBXs9K3iCXBbsMRPWSZD0p&export=download&confirm=t
+Se añadió el campo de edición al momento del registro para que ingreses tu contraseña, de manera que, en el futuro, cuando cambies de dispositivo, puedas recuperar tu perfil que ya tenías creado; así no perderás tu progreso.
+Si ya tenías tu perfil creado, al momento de esta actualización solo se te solicitará que ingreses una contraseña, de manera que ya no tendrás que crear un perfil nuevo.
+Se solucionó el problema de que, en la lista de países, se duplicaban los países, ya que se tomaban en cuenta minúsculas o mayúsculas; esto causaba que el servidor duplicara los países, por más que el país ingresado ya existiera.
+Se aplicaron otras mejoras en la jugabilidad interna para una mejor experiencia.
+Si te gusta este juego, no olvides suscribirte a mi canal en Telegram.
+https://drive.usercontent.google.com/download?id=1OAKfDQp2Wz6H-htFAvBheD65nfY_mmPt&export=download&confirm=t
