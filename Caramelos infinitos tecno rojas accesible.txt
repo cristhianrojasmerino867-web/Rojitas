@@ -1,14 +1,23 @@
-23/10/2026
+24/10/2026
 Bienvenido a caramelos infinitos.
 Desarrollador del juego, Cristhian rojas.
 Anteriormente, este juego había sido presentado como herramienta, pero ahora viene como plugin, esto para brindar una mayor accesibilidad en todo momento que se desee al juego, ya que, para disponer de él en modo herramienta, se debe ingresar al lector de pantalla; en cambio, ahora ya no tendrás que estar entrando a cada rato al lector de pantalla cada vez que quieras continuar tus partidas.
 Se agregaron las actualizaciones automáticas; de esta manera, cuando salga una nueva versión, disfrutarás de este juego.
 Siempre tendrás nuevas funciones a la mano cuando estén disponibles.
-Versión anterior 1.1, versión actual 1.2.
+Versión anterior 1.2, versión actual 1.3.
 Se añadió la posibilidad de crear tu nombre de usuario al ejecutar, por primera vez, el juego.
 Se añadió el campo de edición al momento del registro para que ingreses tu contraseña, de manera que, en el futuro, cuando cambies de dispositivo, puedas recuperar tu perfil que ya tenías creado; así no perderás tu progreso.
+En la versión anterior no podíamos recuperar nuestro perfil porque la contraseña que ingresábamos se guardaba en las preferencias del sistema; ahora se comprueba desde los servidores.
+De esta manera, al momento de acceder al perfil que ya teníamos creado, recuperamos el progreso del jugador, así como el resto de la información, incluyendo el nombre del perfil y el nivel en el cual se encontraba el jugador, para que no tengamos que volver a empezar de cero.
+Se añadieron dos modalidades al ejecutar el juego por primera vez.
+Ahora nos aparecerá un diálogo con dos opciones.
+Tenemos disponible el botón Registrarse, que al momento de ser pulsado te mostrará el campo de edición para ingresar tu nombre de usuario, el país al cual perteneces y tu contraseña, que vas a utilizar para acceder a tu perfil.
+Tenemos disponible el botón “Ya tengo una cuenta”. Cuando se pulse, te solicitará tu nombre de usuario y tu contraseña. Así hacemos la recuperación de un perfil ya creado.
 Si ya tenías tu perfil creado, al momento de esta actualización solo se te solicitará que ingreses una contraseña, de manera que ya no tendrás que crear un perfil nuevo.
 Se solucionó el problema de que, en la lista de países, se duplicaban los países, ya que se tomaban en cuenta minúsculas o mayúsculas; esto causaba que el servidor duplicara los países, por más que el país ingresado ya existiera.
-Se aplicaron otras mejoras en la jugabilidad interna para una mejor experiencia.
+Se solucionó el problema de la carta de plan dental que no te protegía contra las visitas al dentista; esto causaba que, al momento, pierdas una gran cantidad de caramelos.
+Se solucionó el problema de la carta bolsa antirrobo que, al activarse, no te protegía de la pérdida de caramelos cuando el Bot utilizaba la carta Ladrón de caramelos.
+Se solucionó el problema de la carta escudo, que no evitaba que el bot te robara cierta cantidad de caramelos o te atacara con algún bloqueo.
+Si les gusta mi trabajo, suscríbanse a mi canal en Telegram y no olviden compartir este juego para llevarlo a más personas.
 Si te gusta este juego, no olvides suscribirte a mi canal en Telegram.
-https://drive.usercontent.google.com/download?id=1OAKfDQp2Wz6H-htFAvBheD65nfY_mmPt&export=download&confirm=t
+https://drive.usercontent.google.com/download?id=1i3YH85gx5W6hKW0y1gMNcGlNzdSHGFGF&export=download&confirm=t
