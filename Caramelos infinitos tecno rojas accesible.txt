@@ -1,7 +1,7 @@
-24/10/2026
+26/10/2026
 Versión anterior 1.3, versión actual 1.4.
 En esta versión se corrigió el error de la falla al momento de activar las cartas de defensa
 Se corrigió el error de que podías ingresar cualquier cosa en el campo de edición. Al momento de ingresar el país al cual pertenecías, ahora esto ya no es posible; si no ingresas un nombre real de un país, simplemente no te registras.
 Se corrigió el título de la vista que mostraba la cantidad de cartas del nivel 1 en niveles superiores, a pesar de que ya estabas en el nivel 6 o 7.
 A continuación, actualiza para disfrutar.
-https://drive.usercontent.google.com/download?id=1JVN7a2m2mws2tClllLbQ_A7ooucKfrAd&export=download&confirm=t
+https://drive.usercontent.google.com/download?id=12D7eaU_yZX9rADPqI5gmxJ8hIEf_ub9H&export=download&confirm=t
