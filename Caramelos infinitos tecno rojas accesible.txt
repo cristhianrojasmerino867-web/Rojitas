@@ -1,9 +1,13 @@
-27/10/2026 16:30
-Versión anterior 1.4, versión actual 1.5
+28/10/2026 21:30
+Versión anterior 1.5, versión actual 1.6.
 En esta versión se corrigió el error de la falla al momento de activar las cartas de defensa
 Se corrigió el error de que podías ingresar cualquier cosa en el campo de edición. Al momento de ingresar el país al cual pertenecías, ahora esto ya no es posible; si no ingresas un nombre real de un país, simplemente no te registras.
 Se corrigió el título de la vista que mostraba la cantidad de cartas del nivel 1 en niveles superiores, a pesar de que ya estabas en el nivel 6 o 7.
 Se añadieron nueve cartas Premium que solo están disponibles mediante un único pago de $3.
-Esta suscripción desbloqueará 9 cartas. La mejor de todas es la caja fuerte, la cual, si la activas desde el inicio de la partida, te protegerá únicamente en esa partida, pero serás protegido de todos los ataques de bloqueos.
+Se añadió la tienda en la pantalla principal del juego, en la que el usuario que aún no es Premium puede ver las cartas; así, pulsando cualquiera de ellas, obtendrá una descripción de lo que hace cada una.
+Al final de las cartas hay un botón que se llama Comprar Premium. Si lo pulsan, serán redirigidos a WhatsApp para escribirme cualquiera que esté interesado.
+Esta suscripción Premium no solamente activa estas cartas, sino que se van a agregar cosas que se vienen para este juego aún más interesantes, las cuales ya no será necesario que hagan otro pago.
+No se obliga a nadie a comprar; solo es para los que deseen.
+Dentro del panel de configuración se añadió el botón para cambiar tu nombre de usuario; cabe recalcar que, al momento de escribir tu nombre de usuario, se te solicita también ingresar tu contraseña actual para verificación de uso propio.
 A continuación, actualiza para disfrutar.
-https://drive.usercontent.google.com/download?id=1mp5RT0XTmnGf_nKhibX_0W4nUwUueFxT&export=download&confirm=t
+https://drive.usercontent.google.com/download?id=1Uh3rBeFnWtyO_pSnm91JIuAJcw8VLVNj&export=download&confirm=t
