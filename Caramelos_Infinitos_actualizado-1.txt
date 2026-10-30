@@ -1,0 +1,1989 @@
+require "import"
+            import "android.hardware.Sensor"
+            import "android.content.Context"
+            import "android.hardware.SensorManager"
+            import "android.hardware.SensorEventListener"
+import "android.os.Vibrator"
+import "android.widget.*"
+import "com.androlua.*"
+import "android.content.Intent"
+import "android.speech.SpeechRecognizer"
+import "android.speech.RecognitionListener"
+import "android.speech.RecognizerIntent"
+    import "java.text.SimpleDateFormat"
+    import "java.util.Date"
+    import "java.io.File"
+import "android.os.Handler"
+import "android.widget.LinearLayout"
+import "android.widget.SeekBar"
+import "android.widget.TextView"
+import "android.widget.Button"
+import "android.widget.ImageView"
+import "android.widget.ListView"
+import "android.view.View"
+import "android.media.MediaPlayer"
+import "android.content.DialogInterface"
+import "android.view.WindowManager"
+import "android.content.Intent"
+import "android.provider.Settings"
+import "android.content.pm.PackageManager"
+import "android.content.Context"
+import "android.os.Build"
+import "android.os.VibrationEffect"
+import "android.os.Vibrator"
+import "android.widget.Toast"
+import "java.io.File"
+import "java.lang.String"
+import "java.io.FileReader"
+import "java.io.FileWriter"
+import "java.util.ArrayList"
+import "android.view.KeyEvent"
+import "java.io.BufferedWriter"
+import "java.io.BufferedReader"
+import "android.graphics.Color"
+import "android.widget.EditText"
+import "android.app.AlertDialog"
+import "android.app.ProgressDialog"
+import "android.graphics.drawable.ColorDrawable"
+import "android.widget.Spinner"
+import "android.widget.PageView"
+import "android.widget.CardView"
+import "android.widget.ArrayAdapter"
+import "android.widget.RippleLayout"
+import "android.widget.RelativeLayout"
+import "android.media.AudioManager"
+import "android.provider.MediaStore"
+import "java.io.FileOutputStream"
+import "java.io.OutputStreamWriter"
+import "java.io.InputStreamReader"
+import "java.io.FileInputStream"
+import "java.text.SimpleDateFormat"
+import "java.util.Date"
+import "android.content.ContentValues"
+import "android.media.MediaMuxer"
+import "android.media.MediaFormat"
+import "android.content.*"
+import "android.net.Uri"
+import "android.widget.*"
+import "java.lang.reflect.Array"
+import "java.lang.System"
+import "android.os.Environment"
+import "com.androlua.*"
+import "android.content.Context"
+import "android.content.SharedPreferences"
+import "android.os.Handler"
+import "android.os.Looper"
+import "android.os.Vibrator"
+import "com.androlua.Http"
+import "android.net.Uri"
+import "android.widget.LinearLayout"
+import "android.widget.Button"
+import "android.app.AlertDialog"
+import "android.widget.TextView"
+import "android.view.MenuItem"
+import "android.widget.PopupMenu"
+import "java.util.Locale"
+import "android.media.MediaPlayer"
+import "android.media.SoundPool"
+import "android.media.AudioAttributes"
+import "android.preference.PreferenceManager"
+import "luajava"
+import "android.media.ToneGenerator"
+import "android.media.AudioManager"
+import "android.text.TextWatcher"
+import "android.text.Editable"
+import "android.widget.*"
+import "com.androlua.*"
+import "android.text.Html"
+import "java.util.Locale"
+import "android.os.Environment"
+import "android.text.InputType"
+import "java.io.File"
+import "android.content.Intent" -- Intent को सही से इम्पोर्ट करें
+json = require "cjson"
+local cjson = pcall(require, "cjson") and require("cjson") or require("json")
+-- Perfil local: no se restringe el acceso por listas ni por fecha de vencimiento.
+local prefs = PreferenceManager.getDefaultSharedPreferences(service)
+local editor = prefs.edit()
+local nombreUsuario = prefs.getString("user_name", "")
+local paisUsuario = prefs.getString("user_country", "")
+local usuarioAdministrador = "cristhian61"
+local FIREBASE_URL = "https://caramelos-infinitos-default-rtdb.firebaseio.com/"
+
+require "import"
+import "android.app.*"
+import "android.os.*"
+import "android.widget.*"
+import "android.view.*"
+import "android.graphics.*"
+import "android.speech.tts.*"
+import "android.content.*"
+import "java.io.File"
+import "android.content.pm.PackageManager"
+import "android.content.Context"
+import "android.os.Build"
+import "android.os.VibrationEffect"
+import "android.accessibilityservice.AccessibilityService"
+import "android.graphics.PixelFormat"
+import "android.media.MediaPlayer"
+import "com.androlua.LuaDialog"
+import "java.net.URL"
+import "java.io.FileOutputStream"
+import "java.io.FileInputStream"
+import "java.util.zip.ZipInputStream"
+import "java.lang.Thread"
+import "java.lang.Runnable"
+import "java.lang.Byte"
+import "java.lang.reflect.Array"
+
+-- ============================================================
+--  CARAMELOS INFINITOS - VERSION SERVICIO (plugin de accesibilidad)
+--  Sin Activity: todo corre sobre el contexto "service" y la
+--  interfaz se dibuja como overlay con WindowManager.
+-- ============================================================
+ctx = service or this
+
+nivel=1
+partidaNivel=1
+meta=1000
+caramelosJugador=0
+caramelosBot=0
+caramelosTotalesRecolectados=0
+manoJugador={}
+manoBot={}
+defensasJugador={}
+defensasBot={}
+bloqueadoJugador=false
+bloqueadoBot=false
+tipoBloqueoJugador=""
+tipoBloqueoBot=""
+turnoJugador=true
+subidonActivoJugador=false
+subidonActivoBot=false
+
+eventos={
+ dentistaUsado=false,
+ feriaUsadas=0,
+ lluviaUsada=false,
+ contadorTurnos=0
+}
+
+cartasUnicasUsadas={}
+
+TIPOS_BLOQUEO={"Ladron", "Bajon", "Dentista", "Pegajoso", "Congelado", "Azucar"}
+CARTAS_UNICAS={"Plan_Dental", "Guantes_Antiadherentes", "Bolsas_Antirrobo", "Control_Azucar"}
+
+selectedSpeedIndex=1.0
+selectedSpeed=100
+
+function getTamanoMano()
+ return 6 + (nivel - 1)
+end
+
+basePath="/storage/emulated/0/Tecno rojas accesible/caramelos"
+pcall(function() File(basePath).mkdirs() end)
+filePath=basePath.."/progreso_caramelos.lua"
+
+vibrador=ctx.getSystemService(Context.VIBRATOR_SERVICE)
+handler=Handler(Looper.getMainLooper())
+
+tts=nil
+ttsMotor=""
+rootView=nil
+configView=nil
+enMenu=true
+enArena=false
+enConfig=false
+wm=ctx.getSystemService(Context.WINDOW_SERVICE)
+
+-- ============================================================
+--  EFECTOS DE SONIDO (opcionales)
+--  Carpeta : /storage/emulated/0/Tecno rojas accesible/caramelos/Sonidos del juego
+--  Archivo : .../Sonidos del juego/sonido.lua (viene dentro del .zip descargado)
+-- ============================================================
+carpetaSonidos=basePath.."/Sonidos del juego"
+rutaSonidoLua=carpetaSonidos.."/sonido.lua"
+SONIDOS_URL="https://drive.usercontent.google.com/download?id=1oyjhSUHYlfRQAerVhZ9OS232xWaCc7ID&export=download&confirm=t"
+
+ARCHIVO_MUSICA="MiJazz.ogg"              -- suena todo el tiempo en menú y partida
+SND_CONFIG="1.mp3"                       -- entrar, cerrar y guardar configuración
+SND_CARTA="colocar una ficha.m4a"        -- cualquier carta
+SND_ROBO="robar una ficha.m4a"           -- carta Ladrón de Caramelos
+VOL_MUSICA=0.5
+VOL_EFECTOS=1.0
+
+efectosActivos=true
+interfazAbierta=false
+descargandoEfectos=false
+mp_musica=nil
+global_mp_efectos=nil
+
+if global_mp_efectos ~= nil then
+ pcall(function() global_mp_efectos.stop() end)
+ pcall(function() global_mp_efectos.release() end)
+ global_mp_efectos=nil
+end
+
+-- Por defecto la carpeta de sonidos; el módulo sonido.lua puede redefinirla
+get_script_dir=function() return carpetaSonidos.."/" end
+
+function file_exists(name)
+ local f=io.open(name,"r")
+ if f then f:close() return true end
+ return false
+end
+
+function cargarModuloSonido()
+ if not file_exists(rutaSonidoLua) then return false end
+ package.path=carpetaSonidos.."/?.lua;"..package.path
+ local ok=pcall(function() import("Sonido") end)
+ if not ok then ok=pcall(function() import("sonido") end) end
+ if not ok then
+  ok=pcall(function()
+   local fn=loadfile(rutaSonidoLua)
+   if fn then fn() end
+  end)
+ end
+ return ok
+end
+
+-- Devuelve la ruta del archivo de sonido (primero la ruta fija), o nil si no existe
+function get_file_path(filename)
+ local p=carpetaSonidos.."/"..filename
+ if file_exists(p) then return p end
+ local d=nil
+ if type(get_script_dir)=="function" then pcall(function() d=get_script_dir() end) end
+ if type(d)=="string" and d~="" then
+  if d:sub(-1)~="/" then d=d.."/" end
+  if file_exists(d..filename) then return d..filename end
+ end
+ return nil
+end
+
+function detenerMusica()
+ if mp_musica~=nil then
+  pcall(function() mp_musica.stop() end)
+  pcall(function() mp_musica.release() end)
+  mp_musica=nil
+ end
+end
+
+function iniciarMusica()
+ if not sonidoInterfazActivo or enConfig or not interfazAbierta then return end
+ if mp_musica~=nil then
+  local ok,sonando=pcall(function() return mp_musica.isPlaying() end)
+  if ok and sonando then return end
+  detenerMusica()
+ end
+ local ruta=get_file_path(ARCHIVO_MUSICA)
+ if not ruta then return end
+ local mp=nil
+ local ok=pcall(function()
+  mp=MediaPlayer()
+  mp.setDataSource(ruta)
+  mp.setLooping(true)
+  mp.setVolume(VOL_MUSICA,VOL_MUSICA)
+  mp.prepare()
+  mp.setOnCompletionListener(MediaPlayer.OnCompletionListener{
+   onCompletion=function()
+    -- Respaldo: si por algún motivo no hizo bucle, vuelve a empezar
+    if mp_musica==mp and sonidoInterfazActivo and not enConfig then
+     pcall(function() mp.seekTo(0) mp.start() end)
+    end
+   end
+  })
+  mp.start()
+  mp_musica=mp
+ end)
+ if not ok and mp~=nil then pcall(function() mp.release() end) end
+end
+
+function detenerEfecto()
+ if global_mp_efectos~=nil then
+  pcall(function() global_mp_efectos.stop() end)
+  pcall(function() global_mp_efectos.release() end)
+  global_mp_efectos=nil
+ end
+end
+
+function play_music_efectos(filename, volume)
+ detenerEfecto()
+ local ruta=get_file_path(filename)
+ if not ruta then return end
+ local mp=nil
+ local ok=pcall(function()
+  mp=MediaPlayer()
+  mp.setDataSource(ruta)
+  mp.setVolume(volume,volume)
+  mp.prepare()
+  mp.setOnCompletionListener(MediaPlayer.OnCompletionListener{
+   onCompletion=function()
+    pcall(function() mp.release() end)
+    if global_mp_efectos==mp then global_mp_efectos=nil end
+   end
+  })
+  mp.start()
+  global_mp_efectos=mp
+ end)
+ if not ok and mp~=nil then pcall(function() mp.release() end) end
+end
+
+function reproducirEfecto(filename)
+ if not sonidoInterfazActivo then return end
+ play_music_efectos(filename,VOL_EFECTOS*(volumenInterfaz/100))
+end
+function reproducirEfectoJuego(filename)
+ if not sonidoJuegoActivo then return end
+ play_music_efectos(filename,VOL_EFECTOS*(volumenJuego/100))
+end
+function sonidoCarta(carta)
+ if carta=="Ladron_Caramelos" then reproducirEfectoJuego(SND_ROBO)
+ else reproducirEfectoJuego(SND_CARTA) end
+end
+
+function textoToggleEfectos()
+ return "Usar sonido de interfaz principal: "..(sonidoInterfazActivo and "Activado" or "Desactivado")
+end
+function alternarEfectos()
+ sonidoInterfazActivo=not sonidoInterfazActivo
+ efectosActivos=sonidoInterfazActivo
+ if btnToggleEfectos then btnToggleEfectos.setText(textoToggleEfectos()) end
+ pcall(function() seekVolInterfaz.setVisibility(sonidoInterfazActivo and View.VISIBLE or View.GONE) end)
+ if not sonidoInterfazActivo then detenerMusica() detenerEfecto()
+ else iniciarMusica() end
+ guardarProgreso()
+end
+
+function nuevoBuffer(n)
+ local ok,b=pcall(function() return byte[n] end)
+ if ok and b then return b end
+ return Array.newInstance(Byte.TYPE,n)
+end
+
+-- Descarga el .zip y lo extrae SIEMPRE en la carpeta "Sonidos del juego"
+function descargarEfectos()
+ vibrateDevice(200)
+ if descargandoEfectos then
+  hablar("Ya se están descargando los efectos de sonido")
+  return
+ end
+ descargandoEfectos=true
+ hablar("Descargando efectos de sonido. Espera por favor")
+ local tmp=basePath.."/sonidos_temp.zip"
+ local destino=carpetaSonidos
+
+ Thread(Runnable{run=function()
+  local ok,err=pcall(function()
+   File(basePath).mkdirs()
+   File(destino).mkdirs()
+
+   -- 1) Descarga binaria del zip
+   local con=URL(SONIDOS_URL).openConnection()
+   con.setConnectTimeout(20000)
+   con.setReadTimeout(60000)
+   con.setInstanceFollowRedirects(true)
+   con.connect()
+   local code=con.getResponseCode()
+   if code~=200 then error("http "..tostring(code)) end
+   local input=con.getInputStream()
+   local out=FileOutputStream(tmp)
+   local buf=nuevoBuffer(8192)
+   local n=input.read(buf)
+   while n~=-1 do
+    out.write(buf,0,n)
+    n=input.read(buf)
+   end
+   out.close()
+   input.close()
+   con.disconnect()
+
+   -- 2) Validar que sea un zip (empieza con "PK")
+   local fis=FileInputStream(tmp)
+   local b1=fis.read()
+   local b2=fis.read()
+   fis.close()
+   if b1~=80 or b2~=75 then error("no es un zip") end
+
+   -- 3) Extraer
+   local canonDestino=File(destino).getCanonicalPath()
+   local zis=ZipInputStream(FileInputStream(tmp))
+   local entry=zis.getNextEntry()
+   while entry~=nil do
+    local nombre=tostring(entry.getName())
+    nombre=(nombre:gsub("\\","/"))
+    nombre=(nombre:gsub("^Sonidos del juego/",""))
+    if nombre~="" and not entry.isDirectory() then
+     local f=File(destino.."/"..nombre)
+     local canon=f.getCanonicalPath()
+     if canon:sub(1,#canonDestino)==canonDestino then
+      f.getParentFile().mkdirs()
+      local fo=FileOutputStream(f)
+      local m=zis.read(buf)
+      while m~=-1 do
+       fo.write(buf,0,m)
+       m=zis.read(buf)
+      end
+      fo.close()
+     end
+    end
+    zis.closeEntry()
+    entry=zis.getNextEntry()
+   end
+   zis.close()
+   File(tmp).delete()
+
+   -- 4) Si el zip traía otra carpeta contenedora, subir su contenido
+   if not File(destino.."/sonido.lua").exists() then
+    local hijos=File(destino).listFiles()
+    if hijos then
+     for i=0,#hijos-1 do
+      local h=hijos[i]
+      if h.isDirectory() and File(h.getPath().."/sonido.lua").exists() then
+       local contenido=h.listFiles()
+       for j=0,#contenido-1 do
+        contenido[j].renameTo(File(destino.."/"..contenido[j].getName()))
+       end
+      end
+     end
+    end
+   end
+   if not File(destino.."/sonido.lua").exists() then error("falta sonido.lua") end
+  end)
+
+  handler.post(Runnable{run=function()
+   descargandoEfectos=false
+   if ok then
+    pcall(cargarModuloSonido)
+    hablar("Efectos de sonido descargados e instalados")
+   else
+    pcall(function() File(tmp).delete() end)
+    hablar("Error al descargar los efectos de sonido")
+   end
+  end})
+ end}).start()
+end
+
+-- ============================================================
+--  ACTUALIZACIONES AUTOMATICAS
+-- ============================================================
+UPDATES_URL="https://raw.githubusercontent.com/cristhianrojasmerino867-web/Rojitas/main/Caramelos%20infinitos%20tecno%20rojas%20accesible.txt"
+FECHA_CODIGO="13/10/2026" -- Fecha de este código (dd/mm/aaaa). Si en el .txt hay una fecha más nueva, se ofrece la actualización
+RUTA_PLUGIN="/storage/emulated/0/解说/Plugins/Caramelos infinitos tecno rojas accesible/main.lua"
+
+dlgUpdate=nil
+updateView=nil
+
+function hablarHost(txt)
+ pcall(function()
+  if service and service.asyncSpeak then service.asyncSpeak(txt) end
+ end)
+end
+
+-- Acepta dd/mm/aaaa (formato del .txt) y también mm/dd/aaaa cuando el mes es evidente
+function fechaATimestamp(f)
+ local a,b,y=f:match("(%d+)/(%d+)/(%d+)")
+ if not a then return 0 end
+ a,b,y=tonumber(a),tonumber(b),tonumber(y)
+ local d,m=a,b
+ if b>12 and a<=12 then d,m=b,a end
+ return os.time{year=y,month=m,day=d}
+end
+
+function parsearActualizacion(c)
+ local lineas,fecha,cambios,enlace={},nil,{},nil
+ for l in c:gmatch("[^\r\n]+") do table.insert(lineas,l) end
+ if #lineas<2 then return nil end
+ fecha=lineas[1]:match("^%s*(.-)%s*$")
+ for i=2,#lineas do
+  local l=lineas[i]:match("^%s*(.-)%s*$")
+  if l:match("^https?://") then
+   enlace=l
+  elseif l~="" and not enlace then
+   local cb=l:gsub("^%-+%s*","")
+   if cb~="" and #cb>3 then table.insert(cambios,cb) end
+  end
+ end
+ return {fecha=fecha,cambios=cambios,enlace=enlace}
+end
+
+function guardarArchivo(ruta,contenido)
+ return pcall(function()
+  local dir=File(ruta).getParent()
+  if dir and not File(dir).exists() then File(dir).mkdirs() end
+  local f=io.open(ruta,"w")
+  f:write(contenido)
+  f:close()
+ end)
+end
+
+function cerrarPanelActualizacion()
+ if dlgUpdate~=nil then
+  pcall(function() dlgUpdate.dismiss() end)
+  dlgUpdate=nil
+ end
+ if updateView~=nil then
+  pcall(function() wm.removeView(updateView) end)
+  updateView=nil
+ end
+end
+
+function mostrarDialogo(info)
+ local layout=LinearLayout(ctx)
+ layout.setOrientation(LinearLayout.VERTICAL)
+ layout.setPadding(30,30,30,30)
+ local titulo=TextView(ctx)
+ titulo.setText("Cambios en esta versión:")
+ titulo.setTextSize(16)
+ titulo.setTextColor(Color.parseColor("#333333"))
+ titulo.setPadding(0,0,0,10)
+ layout.addView(titulo)
+ local scroll=ScrollView(ctx)
+ scroll.setLayoutParams(LinearLayout.LayoutParams(-1,300))
+ local container=LinearLayout(ctx)
+ container.setOrientation(LinearLayout.VERTICAL)
+ container.setPadding(15,15,15,15)
+ container.setBackgroundColor(Color.parseColor("#F8F9FA"))
+ for _,c in ipairs(#info.cambios>0 and info.cambios or {"Mejoras generales"}) do
+  local txt=TextView(ctx)
+  txt.setText("• "..c)
+  txt.setTextSize(14)
+  txt.setPadding(0,5,0,5)
+  txt.setTextColor(Color.parseColor("#333333"))
+  container.addView(txt)
+ end
+ scroll.addView(container)
+ layout.addView(scroll)
+ local btnActualizar=Button(ctx)
+ btnActualizar.setText("Actualizar")
+ btnActualizar.setBackgroundColor(Color.parseColor("#4CAF50"))
+ btnActualizar.setTextColor(Color.parseColor("#FFFFFF"))
+ btnActualizar.setOnClickListener{onClick=function()
+  cerrarPanelActualizacion()
+  if info.enlace and info.enlace~="" then
+   hablarHost("Descargando actualización")
+   Http.get(info.enlace,function(s,d)
+    if s==200 and d and d~="" then
+     local ok=guardarArchivo(RUTA_PLUGIN,d)
+     if ok then
+      hablarHost("Se actualizó correctamente, ejecuta nuevamente el complemento")
+      -- Cierra el complemento por completo; hay que ejecutarlo de nuevo
+      Handler(Looper.getMainLooper()).postDelayed(Runnable{run=function()
+       cerrarPlugin()
+      end},1800)
+     else
+      hablarHost("Error al guardar actualización")
+      mostrarDialogo(info)
+     end
+    else
+     hablarHost("Error al descargar actualización")
+     mostrarDialogo(info)
+    end
+   end)
+  end
+ end}
+ layout.addView(btnActualizar)
+
+ cerrarPanelActualizacion()
+ hablarHost("Actualización disponible")
+ local ok=pcall(function()
+  dlgUpdate=LuaDialog(ctx)
+  dlgUpdate.setTitle("Actualización disponible")
+  dlgUpdate.setCancelable(false)
+  dlgUpdate.setView(layout)
+  pcall(function() dlgUpdate.getWindow().setType(esAccesibilidad and 2032 or (Build.VERSION.SDK_INT>=26 and 2038 or 2002)) end)
+  dlgUpdate.show()
+ end)
+ if not ok then
+  -- Si el host no permite diálogos desde un servicio, se muestra como panel overlay
+  dlgUpdate=nil
+  layout.setBackgroundColor(Color.parseColor("#FFFFFF"))
+  updateView=layout
+  wm.addView(updateView,crearParamsVentana())
+ end
+end
+
+function verificarActualizacion()
+ local resuelto=false
+ local function continuar(info)
+  if resuelto then return end
+  resuelto=true
+  local hay=false
+  pcall(function()
+   if info and info.fecha and fechaATimestamp(info.fecha)>fechaATimestamp(FECHA_CODIGO) then hay=true end
+  end)
+  if hay then
+   mostrarDialogo(info)   -- hay versión nueva: NO se muestra el juego
+  else
+   if nombreUsuario==nil or tostring(nombreUsuario)=="" or paisUsuario==nil or tostring(paisUsuario)=="" then
+    mostrarRegistro()
+   else
+    iniciarJuego()
+   end
+  end
+ end
+ local ok=pcall(function()
+  Http.get(UPDATES_URL,function(s,d)
+   local info=nil
+   if s==200 and d and d~="" then
+    pcall(function() info=parsearActualizacion(d) end)
+   end
+   handler.post(Runnable{run=function() continuar(info) end})
+  end)
+ end)
+ if not ok then
+  continuar(nil)
+  return
+ end
+ -- Sin respuesta en 8 segundos: se abre el juego normalmente
+ handler.postDelayed(Runnable{run=function() continuar(nil) end},8000)
+end
+
+function vibrateDevice(duration)
+ if not vibracionActiva then return end
+ local vibrator=ctx.getSystemService(Context.VIBRATOR_SERVICE)
+ if vibrator and vibrator.hasVibrator() then
+  local escala=({["Suave"]=0.35,["Normal"]=0.65,["Fuerte"]=0.85,["Muy fuerte"]=1.0})[intensidadVibracion] or 0.65
+  local dur=math.max(20,math.floor(duration*escala))
+  if Build.VERSION.SDK_INT>=26 then
+   vibrator.vibrate(VibrationEffect.createOneShot(dur, math.max(1,math.floor(255*escala))))
+  else vibrator.vibrate(dur) end
+ end
+end
+
+function cargarConfig()
+ local f=io.open(filePath,"r")
+ if f then
+  local data=f:read("*all") f:close()
+  local fn=loadstring(data)
+  if fn then
+   local p=fn()
+   nivel=p.nivel or 1
+   partidaNivel=p.partidaNivel or 1
+   caramelosJugador=p.caramelosJugador or 0
+   caramelosBot=p.caramelosBot or 0
+   caramelosTotalesRecolectados=p.caramelosTotalesRecolectados or 0
+   selectedSpeedIndex=p.selectedSpeedIndex or 1.0
+   selectedSpeed=p.selectedSpeed or 100
+   ttsMotor=p.ttsMotor or ""
+   sonidoInterfazActivo=p.sonidoInterfazActivo
+   if sonidoInterfazActivo==nil then sonidoInterfazActivo=p.efectosActivos~=false end
+   sonidoJuegoActivo=p.sonidoJuegoActivo~=false
+   volumenInterfaz=p.volumenInterfaz or 70
+   volumenJuego=p.volumenJuego or 100
+   vibracionActiva=p.vibracionActiva~=false
+   intensidadVibracion=p.intensidadVibracion or "Normal"
+   efectosActivos=sonidoInterfazActivo
+  end
+ else
+  crearDefecto()
+ end
+
+ if partidaNivel > 3 then
+  nivel = nivel + 1
+  partidaNivel = 1
+ end
+ meta=1000+(nivel-1)*500
+end
+
+function crearDefecto()
+ local contenido=[[
+return {
+nivel=1,partidaNivel=1,meta=1000,caramelosJugador=0,caramelosBot=0,caramelosTotalesRecolectados=0,selectedSpeedIndex=1.0,selectedSpeed=100,ttsMotor="",efectosActivos=true,sonidoInterfazActivo=true,sonidoJuegoActivo=true,volumenInterfaz=70,volumenJuego=100,vibracionActiva=true,intensidadVibracion="Normal"
+}
+]]
+ local f=io.open(filePath,"w")
+ if f then f:write(contenido) f:close() end
+end
+
+function guardarProgreso()
+ local f=io.open(filePath,"w")
+ if f then
+  f:write("return {")
+  f:write("nivel="..nivel..",partidaNivel="..partidaNivel..",meta="..meta..",")
+  f:write("caramelosJugador="..caramelosJugador..",caramelosBot="..caramelosBot..",")
+  f:write("caramelosTotalesRecolectados="..caramelosTotalesRecolectados..",")
+  f:write("selectedSpeedIndex="..selectedSpeedIndex..",selectedSpeed="..selectedSpeed..",")
+  f:write("ttsMotor=\""..ttsMotor.."\",efectosActivos="..tostring(efectosActivos)..",")
+  f:write("sonidoInterfazActivo="..tostring(sonidoInterfazActivo)..",sonidoJuegoActivo="..tostring(sonidoJuegoActivo)..",")
+  f:write("volumenInterfaz="..tostring(volumenInterfaz)..",volumenJuego="..tostring(volumenJuego)..",")
+  f:write("vibracionActiva="..tostring(vibracionActiva)..",intensidadVibracion=\""..intensidadVibracion.."\"}")
+  f:close()
+ end
+end
+
+function updateTTSSpeed()
+ if tts then
+  local finalSpeed = selectedSpeedIndex * (selectedSpeed / 100)
+  if finalSpeed < 0.1 then finalSpeed = 0.1 end
+  if finalSpeed > 10.0 then finalSpeed = 10.0 end
+  tts.setSpeechRate(finalSpeed)
+ end
+end
+
+function iniciarTTS()
+ if tts ~= nil then
+  pcall(function() tts.stop() end)
+  pcall(function() tts.shutdown() end)
+  tts = nil
+ end
+ tts=TextToSpeech(ctx,TextToSpeech.OnInitListener{
+  onInit=function(s)
+   if s==TextToSpeech.SUCCESS then
+    tts.setLanguage(Locale("es","ES"))
+    tts.setPitch(1.0)
+    if ttsMotor~="" and ttsMotor~=nil then
+     pcall(function() tts.setEngineByPackageName(ttsMotor) end)
+    end
+    updateTTSSpeed()
+    handler.postDelayed(function()
+     mostrarMenu()
+    end,400)
+   end
+  end
+ }, ttsMotor)
+end
+
+function hablar(texto)
+ if tts~=nil then
+  tts.speak(texto,TextToSpeech.QUEUE_FLUSH,nil)
+ end
+end
+
+function vibrar(patron)
+ vibrateDevice(patron[1] or 100)
+end
+
+function cartaUnicaUsada(nombre)
+ for _,c in ipairs(cartasUnicasUsadas) do
+  if c==nombre then return true end
+ end
+ return false
+end
+
+function marcarCartaUnica(nombre)
+ if not cartaUnicaUsada(nombre) then
+  table.insert(cartasUnicasUsadas, nombre)
+ end
+end
+
+function esCartaUnica(nombre)
+ for _,c in ipairs(CARTAS_UNICAS) do
+  if c==nombre then return true end
+ end
+ return false
+end
+
+function robarCarta()
+ local r=math.random(100)
+ if not cartaUnicaUsada("Plan_Dental") and r<=5 then return "Plan_Dental" end
+ if not cartaUnicaUsada("Guantes_Antiadherentes") and r<=10 then return "Guantes_Antiadherentes" end
+ if not cartaUnicaUsada("Bolsas_Antirrobo") and r<=15 then return "Bolsas_Antirrobo" end
+ if not cartaUnicaUsada("Control_Azucar") and r<=20 then return "Control_Azucar" end
+
+ if r<=60 then
+  local valores={25,50,75,100,150,175,200}
+  return valores[math.random(#valores)]
+ elseif r<=70 then
+  return "Ladron_Caramelos"
+ elseif r<=80 then
+  return "Manos_Pegajosas"
+ elseif r<=85 then
+  return "Visita_Dentista"
+ elseif r<=92 then
+  return "Bajon_Azucar"
+ elseif r<=99 then
+  return "Subidon_Azucar"
+ else
+  return "Escudo"
+ end
+end
+
+function rellenarMano(mano)
+ while #mano < getTamanoMano() do
+  local nueva = robarCarta()
+  local intentos=0
+  while esCartaUnica(nueva) and cartaUnicaUsada(nueva) and intentos<50 do
+   nueva = robarCarta()
+   intentos=intentos+1
+  end
+  if esCartaUnica(nueva) and cartaUnicaUsada(nueva) then
+   nueva = 25
+  end
+  table.insert(mano, nueva)
+ end
+end
+
+function asegurarDesbloqueo(mano, tipoBloqueo)
+ local tiene=false
+ for _,carta in ipairs(mano) do
+  if type(carta)=="string" and carta=="Desbloqueo_"..tipoBloqueo then
+   tiene=true
+   break
+  end
+ end
+ if not tiene then
+  mano[math.random(#mano)] = "Desbloqueo_"..tipoBloqueo
+ end
+end
+
+function ejecutarEventos(quien)
+ eventos.contadorTurnos = eventos.contadorTurnos + 1
+ local tienePlan = tieneDefensa(quien=="jugador" and defensasJugador or defensasBot, "Plan_Dental", false)
+
+ if not eventos.dentistaUsado and eventos.contadorTurnos >= 2 then
+  eventos.dentistaUsado = true
+  if not tienePlan then
+   local perdida = math.random(200,400)
+   if quien=="jugador" then
+    caramelosJugador = caramelosJugador - perdida
+    if caramelosJugador < 0 then caramelosJugador = 0 end
+    hablar("Evento: Visita al dentista. Pierdes "..perdida.." caramelos")
+   else
+    caramelosBot = caramelosBot - perdida
+    if caramelosBot < 0 then caramelosBot = 0 end
+    hablar("Evento: Bot visita al dentista. Pierde "..perdida.." caramelos")
+   end
+  else
+   hablar("Evento: Visita al dentista. Tu Plan Dental te protege")
+  end
+ end
+
+ if eventos.feriaUsadas < 2 and eventos.contadorTurnos % math.random(2,3) == 0 then
+  eventos.feriaUsadas = eventos.feriaUsadas + 1
+  local ganancia = math.random(350,600)
+  if quien=="jugador" then
+   caramelosJugador = caramelosJugador + ganancia
+   caramelosTotalesRecolectados = caramelosTotalesRecolectados + ganancia
+   hablar("Evento: Feria de caramelos. Ganas "..ganancia.." caramelos")
+  else
+   caramelosBot = caramelosBot + ganancia
+   hablar("Evento: Feria de caramelos. Bot gana "..ganancia.." caramelos")
+  end
+ end
+
+ if not eventos.lluviaUsada and eventos.contadorTurnos >= 5 then
+  eventos.lluviaUsada = true
+  local perdida = math.random(50,100)
+  if quien=="jugador" then
+   caramelosJugador = caramelosJugador - perdida
+   if caramelosJugador < 0 then caramelosJugador = 0 end
+   hablar("Evento: Lluvia de caramelos. Pierdes "..perdida.." caramelos")
+  else
+   caramelosBot = caramelosBot - perdida
+   if caramelosBot < 0 then caramelosBot = 0 end
+   hablar("Evento: Lluvia de caramelos. Bot pierde "..perdida.." caramelos")
+  end
+ end
+end
+
+function generarManoInicial()
+ manoJugador={}
+ manoBot={}
+ cartasUnicasUsadas={}
+ eventos={dentistaUsado=false,feriaUsadas=0,lluviaUsada=false,contadorTurnos=0}
+ subidonActivoJugador=false
+ subidonActivoBot=false
+ local tamano = getTamanoMano()
+ for i=1,tamano do
+  table.insert(manoJugador, robarCarta())
+  table.insert(manoBot, robarCarta())
+ end
+ defensasJugador={}
+ defensasBot={}
+ bloqueadoJugador=false
+ bloqueadoBot=false
+ tipoBloqueoJugador=""
+ tipoBloqueoBot=""
+ turnoJugador=true
+end
+
+function mostrarMenu()
+ enMenu=true
+ enArena=false
+ enConfig=false
+ handler.removeCallbacksAndMessages(nil)
+ layoutMenu.setVisibility(View.VISIBLE)
+ layoutArena.setVisibility(View.GONE)
+ iniciarMusica()
+ hablar("Caramelos Infinitos. Nivel "..nivel.." partida "..partidaNivel.." de 3. Meta "..meta.." caramelos. Mano de "..getTamanoMano().." cartas. Total recolectados "..caramelosTotalesRecolectados)
+ actualizarUI()
+end
+
+function cerrarConfig(silencioso)
+ local estabaAbierto=(configView~=nil)
+ enConfig=false
+ if configView~=nil then
+  pcall(function() wm.removeView(configView) end)
+  configView=nil
+  dlgConfig=nil
+ end
+ if estabaAbierto then
+  if not silencioso then reproducirEfecto(SND_CONFIG) end
+  iniciarMusica()
+ end
+end
+
+function mostrarConfig()
+ vibrateDevice(200)
+ hablar("Configuración")
+ if configView~=nil then return end
+ enConfig=true
+ detenerMusica()
+ reproducirEfecto(SND_CONFIG)
+
+ local configLayout = {
+  ScrollView,
+  layout_width="fill",
+  layout_height="fill",
+  background="#000",
+  {LinearLayout,
+   orientation="vertical",
+   layout_width="fill",
+   layout_height="wrap_content",
+   padding="20dp",
+   background="#000",
+   {TextView,
+    text="CONFIGURACIÓN",
+    textSize="30sp",
+    textColor="#ff8800",
+    gravity="center",
+    layout_marginBottom="20dp"
+   },
+   {TextView,text="Índice de velocidad:",textSize="20sp",textColor="#fff",layout_marginBottom="5dp"},
+   {Spinner,id="spinnerSpeedIndex",layout_width="fill",layout_height="wrap_content",layout_marginBottom="15dp"},
+   {TextView,text="Valor de velocidad:",textSize="20sp",textColor="#fff",layout_marginBottom="5dp"},
+   {Spinner,id="spinnerSpeed",layout_width="fill",layout_height="wrap_content",layout_marginBottom="15dp"},
+   {TextView,text="Motor de voz:",textSize="20sp",textColor="#fff",layout_marginBottom="5dp"},
+   {Spinner,id="spinnerMotor",layout_width="fill",layout_height="wrap_content",layout_marginBottom="25dp"},
+   {Button,id="btnToggleEfectos",text=textoToggleEfectos(),textSize="18sp",layout_width="fill",layout_height="65dp",layout_marginBottom="5dp",background="#222222",textColor="#ffffff",onClick=function() alternarEfectos() end},
+   {TextView,text="Volumen de interfaz principal",textSize="16sp",textColor="#ffffff"},
+   {SeekBar,id="seekVolInterfaz",max=100,progress=volumenInterfaz,layout_width="fill",layout_height="wrap_content"},
+   {Button,id="btnSonidoJuego",text="Usar efectos al jugar: "..(sonidoJuegoActivo and "Activado" or "Desactivado"),textSize="18sp",layout_width="fill",layout_height="65dp",background="#222222",textColor="#ffffff",onClick=function()
+     sonidoJuegoActivo=not sonidoJuegoActivo
+     btnSonidoJuego.setText("Usar efectos al jugar: "..(sonidoJuegoActivo and "Activado" or "Desactivado"))
+     seekVolJuego.setVisibility(sonidoJuegoActivo and View.VISIBLE or View.GONE)
+   end},
+   {TextView,text="Volumen de efectos al jugar",textSize="16sp",textColor="#ffffff"},
+   {SeekBar,id="seekVolJuego",max=100,progress=volumenJuego,layout_width="fill",layout_height="wrap_content"},
+   {Button,id="btnVibracion",text="Vibración: "..(vibracionActiva and "Activada" or "Desactivada"),textSize="18sp",layout_width="fill",layout_height="65dp",background="#222222",textColor="#ffffff",onClick=function()
+     vibracionActiva=not vibracionActiva
+     btnVibracion.setText("Vibración: "..(vibracionActiva and "Activada" or "Desactivada"))
+     spinnerIntensidad.setVisibility(vibracionActiva and View.VISIBLE or View.GONE)
+   end},
+   {Spinner,id="spinnerIntensidad",layout_width="fill",layout_height="wrap_content",layout_marginBottom="15dp"},
+   {Button,
+    text="Descargar efectos de sonido",
+    textSize="22sp",
+    layout_width="fill",
+    layout_height="80dp",
+    layout_marginBottom="15dp",
+    background="#002244",
+    textColor="#88ccff",
+    onClick=function() descargarEfectos() end
+   },
+   {Button,
+    text="GUARDAR CONFIGURACIONES",
+    textSize="22sp",
+    layout_width="fill",
+    layout_height="90dp",
+    background="#004400",
+    textColor="#88ff88",
+    onClick=function() guardarConfiguracion() end
+   },
+   {Button,
+    text="VOLVER",
+    textSize="22sp",
+    layout_width="fill",
+    layout_height="80dp",
+    layout_marginTop="10dp",
+    background="#333",
+    textColor="#ffffff",
+    onClick=function()
+     vibrateDevice(200)
+     cerrarConfig()
+     hablar("Menú principal")
+    end
+   }
+  }
+ }
+
+ configView = loadlayout(configLayout)
+ dlgConfig = configView
+ pcall(function()
+  configView.setFocusableInTouchMode(true)
+  configView.setOnKeyListener(View.OnKeyListener{
+   onKey=function(v,keyCode,event)
+    if keyCode==4 and event.getAction()==0 then
+     vibrateDevice(200)
+     cerrarConfig()
+     hablar("Menú principal")
+     return true
+    end
+    return false
+   end
+  })
+ end)
+ wm.addView(configView, crearParamsVentana())
+
+ actualizarSpinnersConfig()
+ local vals={"Suave","Normal","Fuerte","Muy fuerte"}
+ local av=ArrayAdapter(ctx,android.R.layout.simple_spinner_item,vals)
+ av.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+ spinnerIntensidad.setAdapter(av)
+ local ix=({["Suave"]=0,["Normal"]=1,["Fuerte"]=2,["Muy fuerte"]=3})[intensidadVibracion] or 1
+ spinnerIntensidad.setSelection(ix)
+ seekVolInterfaz.setVisibility(sonidoInterfazActivo and View.VISIBLE or View.GONE)
+ seekVolJuego.setVisibility(sonidoJuegoActivo and View.VISIBLE or View.GONE)
+ spinnerIntensidad.setVisibility(vibracionActiva and View.VISIBLE or View.GONE)
+end
+
+function mostrarArena()
+ enMenu=false
+ enArena=true
+ enConfig=false
+ caramelosJugador=0
+ caramelosBot=0
+ generarManoInicial()
+ layoutMenu.setVisibility(View.GONE)
+ layoutArena.setVisibility(View.VISIBLE)
+ hablar("Nivel "..nivel.." partida "..partidaNivel.." de 3. Tu turno. Mano de "..getTamanoMano().." cartas")
+ actualizarUI()
+ mostrarMano()
+end
+
+function aplicarBloqueo(objetivo, tipo, quien)
+ if objetivo=="jugador" then
+  if tipo=="Pegajoso" and tieneDefensa(defensasJugador,"Guantes_Antiadherentes",false) then
+   hablar("Guantes antiadherentes te protegen de manos pegajosas")
+   return
+  end
+  if tipo=="Ladron" and tieneDefensa(defensasJugador,"Bolsas_Antirrobo",false) then
+   hablar("Bolsas antirrobo te protegen del ladrón")
+   return
+  end
+  if tipo=="Dentista" and tieneDefensa(defensasJugador,"Plan_Dental",false) then
+   hablar("Plan dental te protege del dentista")
+   return
+  end
+  if tipo=="Azucar" and tieneDefensa(defensasJugador,"Control_Azucar",false) then
+   hablar("Control de azúcar te protege del bajón")
+   return
+  end
+
+  bloqueadoJugador=true
+  tipoBloqueoJugador=tipo
+  asegurarDesbloqueo(manoJugador, tipo)
+  hablar(quien.." te bloquea con "..tipo)
+ else
+  if tipo=="Pegajoso" and tieneDefensa(defensasBot,"Guantes_Antiadherentes",false) then
+   hablar("Bot tiene guantes antiadherentes")
+   return
+  end
+  if tipo=="Ladron" and tieneDefensa(defensasBot,"Bolsas_Antirrobo",false) then
+   hablar("Bot tiene bolsas antirrobo")
+   return
+  end
+  if tipo=="Dentista" and tieneDefensa(defensasBot,"Plan_Dental",false) then
+   hablar("Bot tiene plan dental")
+   return
+  end
+  if tipo=="Azucar" and tieneDefensa(defensasBot,"Control_Azucar",false) then
+   hablar("Bot tiene control de azúcar")
+   return
+  end
+
+  bloqueadoBot=true
+  tipoBloqueoBot=tipo
+  asegurarDesbloqueo(manoBot, tipo)
+  hablar("Tu bloqueas al bot con "..tipo)
+ end
+end
+
+function tieneDefensa(defensas, tipo, consumir)
+ consumir = consumir ~= false
+ for i,def in ipairs(defensas) do
+  if def==tipo then
+   if consumir then
+    table.remove(defensas,i)
+   end
+   return true
+  end
+ end
+ return false
+end
+
+function mostrarMano()
+ manoLayout.removeAllViews()
+ local tamano = getTamanoMano()
+
+ for i,carta in ipairs(manoJugador) do
+  local btn=Button(ctx)
+  local texto=""
+  local color=0xFF003300
+
+  if type(carta)=="number" then
+   texto="Caramelo +"..carta
+   color=0xFF004400
+  elseif type(carta)=="string" then
+   if carta=="Ladron_Caramelos" then
+    texto="Ladrón de Caramelos"
+    color=0xFF660000
+   elseif carta=="Manos_Pegajosas" then
+    texto="Manos Pegajosas"
+    color=0xFF663300
+   elseif carta=="Visita_Dentista" then
+    texto="Visita al Dentista"
+    color=0xFF444
+   elseif carta=="Control_Azucar" then
+    texto="Control de Azúcar [ÚNICA]"
+    color=0xFF0066CC
+   elseif carta=="Bajon_Azucar" then
+    texto="Bajón de Azúcar"
+    color=0xFFAA0000
+   elseif carta=="Subidon_Azucar" then
+    texto="Subidón de Azúcar"
+    color=0xFFAA0000
+   elseif carta=="Guantes_Antiadherentes" then
+    texto="Guantes Antiadherentes [ÚNICA]"
+    color=0xFF00AA00
+   elseif carta=="Bolsas_Antirrobo" then
+    texto="Bolsas Antirrobo [ÚNICA]"
+    color=0xFF00AA00
+   elseif carta=="Plan_Dental" then
+    texto="Plan Dental [ÚNICA]"
+    color=0xFF00AA00
+   elseif carta:find("Defensa_") then
+    texto="Defensa "..carta:gsub("Defensa_","")
+    color=0xFF003366
+   elseif carta:find("Desbloqueo_") then
+    texto="Desbloqueo "..carta:gsub("Desbloqueo_","")
+    color=0xFF663300
+   elseif carta=="Escudo" then
+    texto="Escudo"
+    color=0xFF333
+   end
+  end
+
+  btn.setText(texto)
+  btn.setTextSize(15)
+  btn.setBackgroundColor(color)
+  btn.setTextColor(0xFFFFFFFF)
+  btn.setLayoutParams(LinearLayout.LayoutParams(-1,140))
+
+  local idx=i
+  btn.setOnClickListener(function()
+   if turnoJugador then
+    jugarCartaSeleccionada(idx)
+   else
+    hablar("Espera turno del bot")
+   end
+  end)
+
+  manoLayout.addView(btn)
+ end
+end
+
+function jugarCartaSeleccionada(indice)
+ if not enArena or not turnoJugador then return end
+ vibrar({100})
+
+ local carta=manoJugador[indice]
+ table.remove(manoJugador,indice)
+ sonidoCarta(carta)
+
+ if type(carta)=="string" and esCartaUnica(carta) then
+  marcarCartaUnica(carta)
+ end
+
+ rellenarMano(manoJugador)
+
+ local mensajeJugador=""
+
+ if type(carta)=="number" then
+  local cantidad = carta
+  if subidonActivoJugador and cantidad > 50 then
+   cantidad = 50
+   mensajeJugador = "Exceso de dulce. Solo sumas 50 caramelos. Total "..caramelosJugador+50
+  else
+   mensajeJugador = "Sumas "..cantidad.." caramelos. Total "..caramelosJugador+cantidad
+  end
+  caramelosJugador=caramelosJugador+cantidad
+  caramelosTotalesRecolectados=caramelosTotalesRecolectados+cantidad
+  subidonActivoJugador=false
+
+ elseif type(carta)=="string" then
+  if carta=="Ladron_Caramelos" then
+   if tieneDefensa(defensasBot,"Bolsas_Antirrobo",false) then
+    mensajeJugador = "El bot tiene bolsas antirrobo. No puedes robarle"
+   else
+    local robo=math.random(50,150)
+    if caramelosBot>=robo then
+     caramelosBot=caramelosBot-robo
+     caramelosJugador=caramelosJugador+robo
+     caramelosTotalesRecolectados=caramelosTotalesRecolectados+robo
+     mensajeJugador = "Le robas "..robo.." caramelos al bot"
+    else
+     caramelosJugador=caramelosJugador+caramelosBot
+     caramelosTotalesRecolectados=caramelosTotalesRecolectados+caramelosBot
+     mensajeJugador = "Le robas todos los caramelos al bot"
+     caramelosBot=0
+    end
+   end
+
+  elseif carta=="Manos_Pegajosas" then
+   aplicarBloqueo("bot","Pegajoso","Tu")
+   mensajeJugador = "Usas Manos Pegajosas"
+
+  elseif carta=="Visita_Dentista" then
+   if caramelosBot>0 then
+    local perdida=math.random(200,400)
+    caramelosBot=caramelosBot-perdida
+    if caramelosBot<0 then caramelosBot=0 end
+    mensajeJugador = "Bot visita al dentista. Pierde "..perdida.." caramelos"
+   else
+    mensajeJugador = "Bot no tiene caramelos para perder"
+   end
+
+  elseif carta=="Control_Azucar" then
+   table.insert(defensasJugador,"Control_Azucar")
+   mensajeJugador = "Control de azúcar activado"
+
+  elseif carta=="Bajon_Azucar" then
+   aplicarBloqueo("bot","Azucar","Tu")
+   mensajeJugador = "Usas Bajón de Azúcar"
+
+  elseif carta=="Subidon_Azucar" then
+   subidonActivoJugador=true
+   aplicarBloqueo("bot","Azucar","Tu")
+   mensajeJugador = "Subidón de Azúcar. Tus caramelos +50 quedan limitados a 50"
+
+  elseif carta=="Guantes_Antiadherentes" then
+   table.insert(defensasJugador,"Guantes_Antiadherentes")
+   mensajeJugador = "Guantes antiadherentes equipados"
+
+  elseif carta=="Bolsas_Antirrobo" then
+   table.insert(defensasJugador,"Bolsas_Antirrobo")
+   mensajeJugador = "Bolsas antirrobo equipadas"
+
+  elseif carta=="Plan_Dental" then
+   table.insert(defensasJugador,"Plan_Dental")
+   mensajeJugador = "Plan dental activado"
+
+  elseif carta:find("Defensa_") then
+   local tipo=carta:gsub("Defensa_","")
+   table.insert(defensasJugador,tipo)
+   mensajeJugador = "Te proteges contra "..tipo
+
+  elseif carta:find("Desbloqueo_") then
+   local tipo=carta:gsub("Desbloqueo_","")
+   if tipoBloqueoJugador==tipo then
+    bloqueadoJugador=false
+    tipoBloqueoJugador=""
+    mensajeJugador = "Desbloqueado de "..tipo
+   else
+    mensajeJugador = "No sirve para "..tipoBloqueoJugador
+   end
+
+  elseif carta=="Escudo" then
+   defensasJugador={"Escudo"}
+   mensajeJugador = "Escudo activado"
+  end
+ end
+
+ hablar(mensajeJugador)
+ turnoJugador=false
+ actualizarUI()
+ mostrarMano()
+
+ verificarVictoria()
+ if not enArena then return end
+
+ ejecutarEventos("jugador")
+ actualizarUI()
+
+ handler.removeCallbacksAndMessages(nil)
+ handler.postDelayed(function()
+  turnoBot()
+ end,1200)
+end
+
+function turnoBot()
+ if not enArena or turnoJugador then return end
+ handler.removeCallbacksAndMessages(nil)
+ vibrar({80})
+
+ if bloqueadoBot then
+  for i,carta in ipairs(manoBot) do
+   if type(carta)=="string" and carta:find("Desbloqueo_"..tipoBloqueoBot) then
+    table.remove(manoBot,i)
+    rellenarMano(manoBot)
+    bloqueadoBot=false
+    tipoBloqueoBot=""
+    hablar("Bot se desbloquea. Tu turno")
+    turnoJugador=true
+    actualizarUI()
+    mostrarMano()
+    return
+   end
+  end
+  hablar("Bot bloqueado. Tu turno")
+  turnoJugador=true
+  actualizarUI()
+  mostrarMano()
+  return
+ end
+
+ local idx=math.random(#manoBot)
+ local carta=manoBot[idx]
+ table.remove(manoBot,idx)
+ sonidoCarta(carta)
+
+ if type(carta)=="string" and esCartaUnica(carta) then
+  marcarCartaUnica(carta)
+ end
+
+ rellenarMano(manoBot)
+
+ local mensajeBot=""
+
+ if type(carta)=="number" then
+  local cantidad = carta
+  if subidonActivoBot and cantidad > 50 then
+   cantidad = 50
+   mensajeBot = "Bot tiene exceso de dulce. Solo suma 50. Total "..caramelosBot+50
+  else
+   mensajeBot = "Bot suma "..cantidad.." caramelos. Total "..caramelosBot+cantidad
+  end
+  caramelosBot=caramelosBot+cantidad
+  subidonActivoBot=false
+
+ elseif type(carta)=="string" then
+  if carta=="Ladron_Caramelos" then
+   if tieneDefensa(defensasJugador,"Bolsas_Antirrobo",false) then
+    mensajeBot = "Tus bolsas antirrobo protegen tus caramelos del bot"
+   else
+    local robo=math.random(50,150)
+    if caramelosJugador>=robo then
+     caramelosJugador=caramelosJugador-robo
+     caramelosBot=caramelosBot+robo
+     mensajeBot = "Bot te roba "..robo.." caramelos"
+    else
+     caramelosBot=caramelosBot+caramelosJugador
+     mensajeBot = "Bot te roba todos tus caramelos"
+     caramelosJugador=0
+    end
+   end
+
+  elseif carta=="Manos_Pegajosas" then
+   aplicarBloqueo("jugador","Pegajoso","Bot")
+   mensajeBot = "Bot usa Manos Pegajosas"
+
+  elseif carta=="Visita_Dentista" then
+   if caramelosJugador>0 then
+    local perdida=math.random(200,400)
+    caramelosJugador=caramelosJugador-perdida
+    if caramelosJugador<0 then caramelosJugador=0 end
+    mensajeBot = "Visitas al dentista. Pierdes "..perdida.." caramelos"
+   else
+    mensajeBot = "No tienes caramelos para perder"
+   end
+
+  elseif carta=="Control_Azucar" then
+   table.insert(defensasBot,"Control_Azucar")
+   mensajeBot = "Bot activa control de azúcar"
+
+  elseif carta=="Bajon_Azucar" or carta=="Subidon_Azucar" then
+   if carta=="Subidon_Azucar" then subidonActivoBot=true end
+   aplicarBloqueo("jugador","Azucar","Bot")
+   mensajeBot = "Bot usa "..carta
+
+  elseif carta=="Guantes_Antiadherentes" then
+   table.insert(defensasBot,"Guantes_Antiadherentes")
+   mensajeBot = "Bot equipa guantes antiadherentes"
+
+  elseif carta=="Bolsas_Antirrobo" then
+   table.insert(defensasBot,"Bolsas_Antirrobo")
+   mensajeBot = "Bot equipa bolsas antirrobo"
+
+  elseif carta=="Plan_Dental" then
+   table.insert(defensasBot,"Plan_Dental")
+   mensajeBot = "Bot activa plan dental"
+
+  elseif carta:find("Defensa_") then
+   local tipo=carta:gsub("Defensa_","")
+   table.insert(defensasBot,tipo)
+   mensajeBot = "Bot se protege contra "..tipo
+
+  elseif carta=="Escudo" then
+   defensasBot={"Escudo"}
+   mensajeBot = "Bot activa Escudo"
+  end
+ end
+
+ hablar(mensajeBot)
+
+ turnoJugador=true
+ actualizarUI()
+ mostrarMano()
+ ejecutarEventos("bot")
+ actualizarUI()
+ verificarVictoria()
+end
+
+function verificarVictoria()
+ if caramelosJugador>=meta then
+  hablar("Ganaste partida "..partidaNivel.." de 3 del nivel "..nivel)
+  vibrar({300,100,300})
+
+  partidaNivel=partidaNivel+1
+  if partidaNivel>3 then
+   nivel=nivel+1
+   partidaNivel=1
+   meta=1000+(nivel-1)*500
+   hablar("Subes a nivel "..nivel..". Mano ahora de "..getTamanoMano().." cartas")
+  end
+
+  guardarProgreso()
+  enviarEstadisticasSilenciosas()
+
+  handler.postDelayed(function()
+   mostrarArena()
+  end,3000)
+  enArena=false
+
+ elseif caramelosBot>=meta then
+  hablar("El bot gano esta partida")
+  vibrar({800,200,800})
+  guardarProgreso()
+  enviarEstadisticasSilenciosas()
+
+  handler.postDelayed(function()
+   mostrarArena()
+  end,2500)
+  enArena=false
+ end
+end
+
+function actualizarUI()
+ nivelTxt.setText("Nivel "..nivel.." - Partida "..partidaNivel.."/3")
+ metaTxt.setText("Meta: "..meta.." caramelos - Mano: "..getTamanoMano().." - Totales: "..caramelosTotalesRecolectados)
+ if turnoJugador then
+  jugadorTxt.setText("TU TURNO - Tu: "..caramelosJugador.." caramelos")
+ else
+  jugadorTxt.setText("TURNO BOT - Tu: "..caramelosJugador.." caramelos")
+ end
+ botTxt.setText("Bot: "..caramelosBot.." caramelos")
+ if bloqueadoJugador then
+  jugadorTxt.setText(jugadorTxt.getText().."\nBLOQUEADO por "..tipoBloqueoJugador)
+ end
+ if bloqueadoBot then
+  botTxt.setText(botTxt.getText().."\nBOT BLOQUEADO por "..tipoBloqueoBot)
+ end
+end
+
+function getAvailableEngines()
+ local engines = {"Sistema"}
+ local pm = ctx.getPackageManager()
+ local intent = Intent(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA)
+ local list = pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+ for i = 0, list.size() - 1 do
+  local pkg = list.get(i).activityInfo.packageName
+  if pkg ~= "com.google.android.tts" then
+   table.insert(engines, pkg)
+  end
+ end
+ table.insert(engines, 2, "com.google.android.tts")
+ return engines
+end
+
+function getSpeedIndices()
+ local indices = {}
+ for i = 1, 10 do
+  for j = 0, 9 do
+   if i == 10 and j > 0 then break end
+   table.insert(indices, i.."."..j)
+  end
+ end
+ return indices
+end
+
+function getSpeeds()
+ local speeds = {}
+ for i = 1, 100 do table.insert(speeds, tostring(i)) end
+ return speeds
+end
+
+function actualizarSpinnersConfig()
+ local speedIndices = getSpeedIndices()
+ local adapterIdx=ArrayAdapter(ctx, android.R.layout.simple_spinner_item, speedIndices)
+ adapterIdx.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+ spinnerSpeedIndex.setAdapter(adapterIdx)
+ local idxSel = 1
+ for i,v in ipairs(speedIndices) do
+  if v==tostring(selectedSpeedIndex) then idxSel=i break end
+ end
+ spinnerSpeedIndex.setSelection(idxSel-1)
+
+ local speeds = getSpeeds()
+ local adapterVal=ArrayAdapter(ctx, android.R.layout.simple_spinner_item, speeds)
+ adapterVal.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+ spinnerSpeed.setAdapter(adapterVal)
+ spinnerSpeed.setSelection(selectedSpeed-1)
+
+ local motores = getAvailableEngines()
+ local adapterMot=ArrayAdapter(ctx, android.R.layout.simple_spinner_item, motores)
+ adapterMot.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+ spinnerMotor.setAdapter(adapterMot)
+
+ local sel=1
+ for i,name in ipairs(motores) do
+  if name==ttsMotor then sel=i break end
+ end
+ spinnerMotor.setSelection(sel-1)
+end
+
+function guardarConfiguracion()
+ vibrateDevice(200)
+ reproducirEfecto(SND_CONFIG)
+ local idxStr = spinnerSpeedIndex.getSelectedItem()
+ selectedSpeedIndex = tonumber(idxStr)
+ local velStr = spinnerSpeed.getSelectedItem()
+ selectedSpeed = tonumber(velStr)
+ local motorSel = spinnerMotor.getSelectedItem()
+ if motorSel=="Sistema" then ttsMotor="" else ttsMotor=motorSel end
+ volumenInterfaz=tonumber(seekVolInterfaz.getProgress()) or volumenInterfaz
+ volumenJuego=tonumber(seekVolJuego.getProgress()) or volumenJuego
+ intensidadVibracion=tostring(spinnerIntensidad.getSelectedItem() or "Normal")
+ efectosActivos=sonidoInterfazActivo
+
+ guardarProgreso()
+ iniciarTTS()
+ local finalSpeed = selectedSpeedIndex * (selectedSpeed / 100)
+ hablar("Configuración guardada. Velocidad "..string.format("%.2f", finalSpeed).."x")
+ cerrarConfig(true)
+end
+
+-- ============================================================
+--  VENTANA / SERVICIO
+-- ============================================================
+esAccesibilidad=false
+pcall(function()
+ esAccesibilidad = luajava.instanceof(ctx, AccessibilityService)
+end)
+
+function crearParamsVentana()
+ local tipo
+ if esAccesibilidad then
+  tipo=2032 -- TYPE_ACCESSIBILITY_OVERLAY (no requiere permiso extra)
+ elseif Build.VERSION.SDK_INT >= 26 then
+  tipo=2038 -- TYPE_APPLICATION_OVERLAY
+ else
+  tipo=2002 -- TYPE_PHONE
+ end
+ local lp=WindowManager.LayoutParams()
+ lp.width=-1
+ lp.height=-1
+ lp.type=tipo
+ lp.flags=0
+ lp.format=PixelFormat.TRANSLUCENT
+ return lp
+end
+
+-- Muestra diálogos correctamente desde el servicio de accesibilidad.
+-- Un Dialog normal intenta usar una ventana de aplicación y provoca BadTokenException.
+function mostrarDialogoSeguro(dialogo)
+ if dialogo == nil then return false end
+ local ok = pcall(function()
+  local ventana = dialogo.getWindow()
+  if ventana ~= nil then
+   local tipo
+   if esAccesibilidad then
+    tipo = 2032 -- TYPE_ACCESSIBILITY_OVERLAY
+   elseif Build.VERSION.SDK_INT >= 26 then
+    tipo = 2038 -- TYPE_APPLICATION_OVERLAY
+   else
+    tipo = 2002 -- TYPE_PHONE
+   end
+   ventana.setType(tipo)
+  end
+  dialogo.show()
+ end)
+ if not ok then
+  -- Respaldo para servicios que no admiten ventanas Dialog: mostrar la vista como overlay.
+  pcall(function()
+   local vista = dialogo.getWindow().getDecorView()
+   if vista ~= nil then
+    wm.addView(vista, crearParamsVentana())
+   end
+  end)
+ end
+ return ok
+end
+
+function cerrarPlugin()
+ interfazAbierta=false
+ enMenu=false
+ enArena=false
+ enConfig=false
+ pcall(function() handler.removeCallbacksAndMessages(nil) end)
+ cerrarConfig(true)
+ cerrarPanelActualizacion()
+ detenerMusica()
+ detenerEfecto()
+ if tts then
+  pcall(function() tts.stop() end)
+  pcall(function() tts.shutdown() end)
+  tts=nil
+ end
+ if rootView~=nil then
+  pcall(function() wm.removeView(rootView) end)
+  rootView=nil
+ end
+ -- Si el host NO es un servicio de accesibilidad, se detiene el servicio.
+ -- En un servicio de accesibilidad solo se cierra la interfaz del plugin.
+ if not esAccesibilidad then
+  pcall(function() ctx.stopSelf() end)
+ end
+end
+
+function onDestroy()
+ cerrarPlugin()
+end
+
+
+-- ============================================================
+-- Firebase Realtime Database: perfiles, comentarios y clasificación
+-- Todas las peticiones de red se ejecutan en segundo plano.
+-- ============================================================
+function firebaseRequest(path, method, payload, callback)
+ Thread(Runnable{run=function()
+  local ok,result=pcall(function()
+   local url=URL(FIREBASE_URL..path..".json")
+   local con=url.openConnection()
+   con.setConnectTimeout(10000); con.setReadTimeout(10000)
+   con.setRequestMethod(method or "GET")
+   if payload~=nil then
+    con.setDoOutput(true)
+    con.setRequestProperty("Content-Type","application/json; charset=utf-8")
+    local out=con.getOutputStream()
+    out.write(String(cjson.encode(payload)).getBytes("UTF-8")); out.flush(); out.close()
+   end
+   local input=con.getInputStream()
+   local reader=BufferedReader(InputStreamReader(input,"UTF-8"))
+   local sb=StringBuilder()
+   local line=reader.readLine()
+   while line~=nil do sb.append(line); line=reader.readLine() end
+   reader.close(); con.disconnect()
+   return tostring(sb.toString())
+  end)
+  handler.post(Runnable{run=function()
+   if callback then callback(ok and result or nil) end
+  end})
+ end}).start()
+end
+
+function registrarPerfil(nombre,pais,callback)
+ local clave=nombre:gsub("[%.%$%#%[%]/]","_")
+ firebaseRequest("players/"..clave,"PUT",{
+  username=nombre,country=pais,score=0,updatedAt=os.time()
+ },function(r)
+  if r then
+   nombreUsuario=nombre; paisUsuario=pais
+   editor.putString("user_name",nombre); editor.putString("user_country",pais); editor.commit()
+   if callback then callback(true) end
+  else if callback then callback(false) end end
+ end)
+end
+
+function mostrarRegistro()
+ local lay=LinearLayout(ctx); lay.setOrientation(1); lay.setPadding(28,28,28,28)
+ local tit=TextView(ctx); tit.setText("Crear cuenta de usuario"); tit.setTextSize(22); lay.addView(tit)
+ local nombre=EditText(ctx); nombre.setHint("Nombre de usuario"); lay.addView(nombre)
+ local pais=EditText(ctx); pais.setHint("País (por ejemplo, Perú)"); lay.addView(pais)
+ local botones=LinearLayout(ctx); botones.setOrientation(0)
+ local cancelar=Button(ctx); cancelar.setText("Cancelar"); botones.addView(cancelar,LinearLayout.LayoutParams(0,-2,1))
+ local aceptar=Button(ctx); aceptar.setText("Aceptar"); botones.addView(aceptar,LinearLayout.LayoutParams(0,-2,1))
+ lay.addView(botones)
+ local dlg=AlertDialog.Builder(ctx).setView(lay).setCancelable(false).create()
+ cancelar.setOnClickListener(function() pcall(function() dlg.dismiss() end); cerrarPlugin() end)
+ aceptar.setOnClickListener(function()
+  local n=tostring(nombre.getText()):gsub("^%s+",""):gsub("%s+$","")
+  local pa=tostring(pais.getText()):gsub("^%s+",""):gsub("%s+$","")
+  if n=="" or pa=="" then hablar("Debes escribir tu nombre de usuario y tu país"); return end
+  aceptar.setEnabled(false); hablar("Registrando cuenta")
+  registrarPerfil(n,pa,function(ok)
+   if ok then pcall(function() dlg.dismiss() end); iniciarJuego()
+   else aceptar.setEnabled(true); hablar("No se pudo registrar. Comprueba tu conexión e inténtalo de nuevo") end
+  end)
+ end)
+ -- En un plugin de accesibilidad no se puede mostrar un Dialog con el tipo de ventana
+ -- predeterminado; debe declararse como TYPE_ACCESSIBILITY_OVERLAY antes de show().
+ mostrarDialogoSeguro(dlg)
+end
+
+function enviarComentario()
+ local ed=EditText(ctx); ed.setHint("Escribe tu comentario")
+ local builder=AlertDialog.Builder(ctx).setTitle("Enviar comentario").setView(ed)
+ .setNegativeButton("Cancelar",nil)
+ .setPositiveButton("Enviar",DialogInterface.OnClickListener{
+  onClick=function()
+   local comentario=tostring(ed.getText()):gsub("^%s+",""):gsub("%s+$","")
+   if comentario=="" then hablar("El comentario está vacío"); return end
+   local key=tostring(System.currentTimeMillis()).."_"..tostring(nombreUsuario or "jugador"):gsub("[^%w]","")
+   firebaseRequest("comments/"..key,"PUT",{
+    username=nombreUsuario,country=paisUsuario,text=comentario,createdAt=os.time()
+   },function(r) hablar(r and "Comentario enviado" or "No se pudo enviar el comentario") end)
+  end
+ })
+ mostrarDialogoSeguro(builder.create())
+end
+
+function leerComentarios()
+ firebaseRequest("comments","GET",nil,function(r)
+  if not r then hablar("No se pudieron cargar los comentarios"); return end
+  local ok,data=pcall(function() return cjson.decode(r) end)
+  if not ok or type(data)~="table" then hablar("Todavía no hay comentarios"); return end
+  local filas={}
+  for _,v in pairs(data) do
+   if type(v)=="table" then
+    table.insert(filas,tostring(v.username or "Jugador").." ("..tostring(v.country or "País desconocido").."): "..tostring(v.text or ""))
+   end
+  end
+  table.sort(filas)
+  local msg=#filas>0 and table.concat(filas,"\n\n") or "Todavía no hay comentarios"
+  local d=AlertDialog.Builder(ctx).setTitle("Comentarios de jugadores").setMessage(msg).setPositiveButton("Cerrar",nil).create()
+  mostrarDialogoSeguro(d)
+ end)
+end
+
+function leerEstadisticas()
+ local opciones={"Ver jugadores top 100","Ver jugadores por país"}
+ local principal=AlertDialog.Builder(ctx).setTitle("Estadísticas de jugadores")
+ .setItems(opciones,DialogInterface.OnClickListener{
+  onClick=function(d,which)
+   if which==0 then
+    firebaseRequest("players","GET",nil,function(r)
+     if not r then hablar("No se pudieron cargar las estadísticas"); return end
+     local ok,data=pcall(function() return cjson.decode(r) end)
+     if not ok or type(data)~="table" then return end
+     local arr={}
+     for _,v in pairs(data) do
+      if type(v)=="table" and tonumber(v.score or 0)>=100000 then table.insert(arr,v) end
+     end
+     table.sort(arr,function(a,b) return (tonumber(a.score) or 0)>(tonumber(b.score) or 0) end)
+     local out={}
+     for i=1,math.min(100,#arr) do table.insert(out,tostring(arr[i].username or "Jugador")..": "..tostring(arr[i].score or 0).." caramelos") end
+     local resultado=AlertDialog.Builder(ctx).setTitle("Jugadores top 100").setMessage(#out>0 and table.concat(out,"\n") or "Aún no hay jugadores con 100 000 caramelos o más").setPositiveButton("Cerrar",nil).create()
+     mostrarDialogoSeguro(resultado)
+    end)
+   else
+    firebaseRequest("players","GET",nil,function(r)
+     if not r then hablar("No se pudieron cargar los países"); return end
+     local ok,data=pcall(function() return cjson.decode(r) end)
+     if not ok or type(data)~="table" then return end
+     local set,lista={},{}
+     for _,v in pairs(data) do if type(v)=="table" and v.country then set[v.country]=true end end
+     for k in pairs(set) do table.insert(lista,k) end
+     table.sort(lista)
+     if #lista==0 then hablar("Todavía no hay países registrados"); return end
+     local paises=AlertDialog.Builder(ctx).setTitle("Jugadores por país").setItems(lista,DialogInterface.OnClickListener{
+      onClick=function(dd,idx)
+       local paisElegido=lista[idx+1]
+       local out={}
+       for _,v in pairs(data) do
+        if type(v)=="table" and v.country==paisElegido then
+         table.insert(out,tostring(v.username or "Jugador")..": "..tostring(v.score or 0).." caramelos")
+        end
+       end
+       table.sort(out)
+       local resultado=AlertDialog.Builder(ctx).setTitle(paisElegido).setMessage(#out>0 and table.concat(out,"\n") or "Sin jugadores").setPositiveButton("Cerrar",nil).create()
+       mostrarDialogoSeguro(resultado)
+      end
+     }).create()
+     mostrarDialogoSeguro(paises)
+    end)
+   end
+  end
+ }).create()
+ mostrarDialogoSeguro(principal)
+end
+
+function enviarEstadisticasSilenciosas()
+ if not nombreUsuario or nombreUsuario=="" then return end
+ local clave=nombreUsuario:gsub("[%.%$%#%[%]/]","_")
+ firebaseRequest("players/"..clave,"PATCH",{
+  username=nombreUsuario,country=paisUsuario,score=math.max(0,tonumber(caramelosTotalesRecolectados) or 0),
+  level=tonumber(nivel) or 1,updatedAt=os.time()
+ },function(r) end)
+end
+
+function iniciarJuego()
+ -- Si quedó una interfaz anterior (plugin relanzado), se limpia
+ if rootView~=nil then
+  pcall(function() wm.removeView(rootView) end)
+  rootView=nil
+ end
+ interfazAbierta=true
+ layout={
+  LinearLayout,
+  orientation="vertical",
+  layout_width="fill",
+  layout_height="fill",
+  background="#000",
+
+  {LinearLayout,
+   id="layoutMenu",
+   orientation="vertical",
+   layout_width="fill",
+   layout_height="fill",
+   gravity="center",
+   padding="20dp",
+   {TextView,
+    text="CARAMELOS INFINITOS",
+    textSize="34sp",
+    textColor="#ff8800",
+    gravity="center",
+    layout_marginBottom="25dp"
+   },
+   {TextView,text="Creado por Cristian Rojas",textSize="16sp",textColor="#ffffff",gravity="center",layout_marginBottom="12dp"},
+   {TextView,id="nivelTxt",text="Nivel 1",textSize="26sp",textColor="#ffffff",gravity="center"},
+   {TextView,id="metaTxt",text="Meta 1000",textSize="24sp",textColor="#ffff00",gravity="center"},
+   {LinearLayout,
+    orientation="horizontal",
+    layout_width="fill",
+    layout_height="wrap_content",
+    layout_marginTop="35dp",
+    {Button,
+     text="JUGAR",
+     textSize="28sp",
+     layout_weight="1",
+     layout_height="110dp",
+     layout_marginRight="5dp",
+     background="#330000",
+     textColor="#ff4400",
+     onClick=function()
+      vibrateDevice(200)
+      mostrarArena()
+     end
+    },
+    {Button,
+     text="CONFIGURACIÓN",
+     textSize="22sp",
+     layout_weight="1",
+     layout_height="110dp",
+     layout_marginLeft="5dp",
+     background="#003333",
+     textColor="#44ffff",
+     onClick=function()
+      vibrateDevice(200)
+      mostrarConfig()
+     end
+    },
+   },
+   {LinearLayout,orientation="horizontal",layout_width="fill",layout_height="wrap_content",layout_marginTop="12dp",
+    {Button,text=(nombreUsuario=="cristhian61" and "Ver comentarios de jugadores" or "Enviar comentario"),textSize="15sp",layout_weight="1",layout_height="75dp",background="#442244",textColor="#ffffff",onClick=function()
+      vibrateDevice(100)
+      if nombreUsuario=="cristhian61" then leerComentarios() else enviarComentario() end
+    end},
+    {Button,text="Leer comentarios",visibility=(nombreUsuario=="cristhian61" and View.GONE or View.VISIBLE),textSize="15sp",layout_weight="1",layout_height="75dp",background="#224444",textColor="#ffffff",onClick=function() leerComentarios() end},
+   },
+   {Button,text="Ver estadísticas de los jugadores",textSize="18sp",layout_width="fill",layout_height="70dp",layout_marginTop="8dp",background="#443300",textColor="#ffffaa",onClick=function() leerEstadisticas() end},
+   {Button,
+    text="SALIR",
+    textSize="26sp",
+    layout_width="fill",
+    layout_height="90dp",
+    layout_marginTop="20dp",
+    background="#333",
+    textColor="#ffffff",
+    onClick=function()
+     vibrateDevice(200)
+     cerrarPlugin()
+    end
+   }
+  },
+
+  {ScrollView,
+   id="layoutArena",
+   layout_width="fill",
+   layout_height="fill",
+   visibility=View.GONE,
+   {LinearLayout,
+    orientation="vertical",
+    layout_width="fill",
+    layout_height="wrap_content",
+    padding="15dp",
+    {TextView,
+     text="PARTIDA EN CURSO",
+     textSize="28sp",
+     textColor="#ff0000",
+     gravity="center",
+     layout_marginBottom="10dp"
+    },
+    {TextView,id="jugadorTxt",text="",textSize="18sp",textColor="#00ff00",gravity="center",layout_marginBottom="10dp"},
+    {TextView,id="botTxt",text="",textSize="18sp",textColor="#ff8800",gravity="center",layout_marginBottom="15dp"},
+    {TextView,
+     id="manoTxt",
+     text="TU MANO - 6 CARTAS:",
+     textSize="20sp",
+     textColor="#ffffff",
+     gravity="center",
+     layout_marginBottom="10dp"
+    },
+    {LinearLayout,
+     id="manoLayout",
+     orientation="vertical",
+     layout_width="fill",
+     layout_height="wrap_content"
+    },
+ {Button,
+     text="VOLVER AL MENU",
+     textSize="22sp",
+     layout_width="fill",
+     layout_height="80dp",
+     layout_marginTop="15dp",
+     background="#333",
+     textColor="#ffffff",
+     onClick=function()
+      vibrateDevice(200)
+      guardarProgreso()
+      mostrarMenu()
+     end -- 1. cierra onClick
+    } -- 2. cierra Button
+   } -- 3. cierra LinearLayout de la arena
+  } -- 4. cierra ScrollView
+
+ } -- 5. cierra layout principal
+
+ rootView=loadlayout(layout)
+ pcall(function()
+  rootView.setFocusableInTouchMode(true)
+  rootView.setOnKeyListener(View.OnKeyListener{
+   onKey=function(v,keyCode,event)
+    if keyCode==4 and event.getAction()==0 then
+     vibrateDevice(200)
+     if enConfig then
+      cerrarConfig()
+      hablar("Menú principal")
+     elseif enArena then
+      guardarProgreso()
+      mostrarMenu()
+     end
+     return true
+    end
+    return false
+   end
+  })
+ end)
+ wm.addView(rootView, crearParamsVentana())
+
+
+ cargarModuloSonido()
+ actualizarUI()
+ iniciarMusica()
+ iniciarTTS()
+end
+
+-- Arranque: primero se revisa si hay actualización; si la hay, NO se muestra el juego
+cargarConfig()
+verificarActualizacion()
