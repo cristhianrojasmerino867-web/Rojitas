@@ -1,13 +1,15 @@
-28/10/2026 21:30
-Versión anterior 1.5, versión actual 1.6.
-En esta versión se corrigió el error de la falla al momento de activar las cartas de defensa
-Se corrigió el error de que podías ingresar cualquier cosa en el campo de edición. Al momento de ingresar el país al cual pertenecías, ahora esto ya no es posible; si no ingresas un nombre real de un país, simplemente no te registras.
-Se corrigió el título de la vista que mostraba la cantidad de cartas del nivel 1 en niveles superiores, a pesar de que ya estabas en el nivel 6 o 7.
-Se añadieron nueve cartas Premium que solo están disponibles mediante un único pago de $3.
-Se añadió la tienda en la pantalla principal del juego, en la que el usuario que aún no es Premium puede ver las cartas; así, pulsando cualquiera de ellas, obtendrá una descripción de lo que hace cada una.
-Al final de las cartas hay un botón que se llama Comprar Premium. Si lo pulsan, serán redirigidos a WhatsApp para escribirme cualquiera que esté interesado.
-Esta suscripción Premium no solamente activa estas cartas, sino que se van a agregar cosas que se vienen para este juego aún más interesantes, las cuales ya no será necesario que hagan otro pago.
-No se obliga a nadie a comprar; solo es para los que deseen.
-Dentro del panel de configuración se añadió el botón para cambiar tu nombre de usuario; cabe recalcar que, al momento de escribir tu nombre de usuario, se te solicita también ingresar tu contraseña actual para verificación de uso propio.
+31/10/2026 23:10
+Versión anterior 1.6, versión actual 1.7.
+Se añadió el modo de juego en línea por equipos de dos personas, ahora disponible para jugar, ya no con una máquina, sino con un usuario real.
+Esto está disponible en la pantalla principal a través de un botón llamado usuarios en línea.
+A su costado hay otro botón llamado bandeja.
+Si pulsas el botón llamado “Usuarios en línea”, te mostrará los jugadores que se encuentren en línea en ese momento. Pulsando en el jugador que selecciones, le podrás enviar una solicitud que la otra persona verá en la opción “Bandeja”.
+Se añadió la clasificación por top 100 del millón de caramelos y clasificación por países en el modo equipo.
+Esta nueva modalidad empieza desde cero. Los dos jugadores que jueguen se guardará su progreso en el servidor y las personas podrán ver con quiénes han hecho equipos y quién de los dos jugadores que ha hecho equipo va llevando la ventaja.
+Ahora los niveles van en aumento por nivel, según vayan avanzando.
+Se solucionaron otros errores con respecto a las cartas, así como también se aplicaron unas cartas adicionales. No son muchas, pero notarás la diferencia desde este nuevo juego.
+Se hicieron otras correcciones y mejoras con respecto a los cierres de los diálogos, así como a la interfaz principal, para cerrar correctamente el juego y no tener problemas.
+Te recuerdo que puedes dar una pequeña contribución contactándome desde el botón que está al final de las cartas, dentro de la tienda de cartas, para apoyar el proyecto y ayudarme a mejorar esto, porque se vienen cosas interesantes.
+Solo, si es tu voluntad, si deseas apoyar el proyecto, ya sabes, esperaré tu mensaje como usuario y jugador. Así mismo, el pago es único; si sale en funciones Premium en el futuro, ese pago contará como realizado para los usuarios que ya cancelen.
 A continuación, actualiza para disfrutar.
-https://drive.usercontent.google.com/download?id=1Uh3rBeFnWtyO_pSnm91JIuAJcw8VLVNj&export=download&confirm=t
+https://drive.usercontent.google.com/download?id=1yrAUFWbDBvvN1Ry3avpMjLpG2Ynt29zD&export=download&confirm=t
