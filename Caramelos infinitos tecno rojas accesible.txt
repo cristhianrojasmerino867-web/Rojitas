@@ -1,9 +1,21 @@
-31/10/2026 23:10
-Versión anterior 1.6, versión actual 1.7.
+6/11/2026 10:00
+Versión anterior 1.7, versión actual 1.8
 Se añadió el modo de juego en línea por equipos de dos personas, ahora disponible para jugar, ya no con una máquina, sino con un usuario real.
 Esto está disponible en la pantalla principal a través de un botón llamado usuarios en línea.
 A su costado hay otro botón llamado bandeja.
-Si pulsas el botón llamado “Usuarios en línea”, te mostrará los jugadores que se encuentren en línea en ese momento. Pulsando en el jugador que selecciones, le podrás enviar una solicitud que la otra persona verá en la opción “Bandeja”.
+Se renombró el botón “Usuarios en línea”, ahora llamado “Partida en línea”.
+Dentro de este botón aparecen el botón usuarios en línea y el botón bandeja.
+Se añadió una forma adicional de partidas en línea.
+Al pulsar el botón “Usuarios en línea”, ahora te muestra dos opciones: partida individual o partida por niveles.
+La partida individual es una partida donde la mano no crece y solamente es una sola partida la que se juega con tu rival.
+La partida por niveles es la que se juega entre dos usuarios, como en la partida individual, pero aquí se cuentan 3 partidas para subir de nivel.
+Se modificó el panel de configuración para ordenar un poco más los botones, así ya no estarán sueltos.
+Ahora tenemos ordenadas las configuraciones de voz, sonido y vibración, así como descargas.
+Se añadió traducción al portugués y al inglés.
+El archivo se descarga automáticamente al ejecutar el juego.
+Si el dispositivo no está en uno de los idiomas que trae el archivo, te pide seleccionar tu idioma que puedas entender.
+Esta configuración también está disponible desde el panel de configuraciones.
+Las opciones de administrador de borrar estadísticas y de borrar comentarios, así como otras funciones, ahora ya no están visibles para cualquier usuario, a menos que yo lo decida.
 Se añadió la clasificación por top 100 del millón de caramelos y clasificación por países en el modo equipo.
 Esta nueva modalidad empieza desde cero. Los dos jugadores que jueguen se guardará su progreso en el servidor y las personas podrán ver con quiénes han hecho equipos y quién de los dos jugadores que ha hecho equipo va llevando la ventaja.
 Ahora los niveles van en aumento por nivel, según vayan avanzando.
@@ -11,5 +23,6 @@ Se solucionaron otros errores con respecto a las cartas, así como también se a
 Se hicieron otras correcciones y mejoras con respecto a los cierres de los diálogos, así como a la interfaz principal, para cerrar correctamente el juego y no tener problemas.
 Te recuerdo que puedes dar una pequeña contribución contactándome desde el botón que está al final de las cartas, dentro de la tienda de cartas, para apoyar el proyecto y ayudarme a mejorar esto, porque se vienen cosas interesantes.
 Solo, si es tu voluntad, si deseas apoyar el proyecto, ya sabes, esperaré tu mensaje como usuario y jugador. Así mismo, el pago es único; si sale en funciones Premium en el futuro, ese pago contará como realizado para los usuarios que ya cancelen.
+Además, el proyecto está creciendo enormemente, lo que me está dando obviamente limitaciones al momento de agregar nuevas funciones y corregir errores que vayan surgiendo. Pero esto es totalmente voluntario; no se obliga a nadie, solo es una contribución que pueden dar según su voluntad para poder mejorar el proyecto y traerles nuevos modos de juego.
 A continuación, actualiza para disfrutar.
-https://drive.usercontent.google.com/download?id=1yrAUFWbDBvvN1Ry3avpMjLpG2Ynt29zD&export=download&confirm=t
+https://drive.usercontent.google.com/download?id=17lq4rU6tQQb7uP8b8lr5S6mF_8KEPHC6&export=download&confirm=t
