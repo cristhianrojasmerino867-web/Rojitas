@@ -1,4 +1,4 @@
-6/11/2026 10:00
+6/11/2026 12:30
 Versión anterior 1.7, versión actual 1.8
 Se añadió el modo de juego en línea por equipos de dos personas, ahora disponible para jugar, ya no con una máquina, sino con un usuario real.
 Esto está disponible en la pantalla principal a través de un botón llamado usuarios en línea.
@@ -24,5 +24,7 @@ Se hicieron otras correcciones y mejoras con respecto a los cierres de los diál
 Te recuerdo que puedes dar una pequeña contribución contactándome desde el botón que está al final de las cartas, dentro de la tienda de cartas, para apoyar el proyecto y ayudarme a mejorar esto, porque se vienen cosas interesantes.
 Solo, si es tu voluntad, si deseas apoyar el proyecto, ya sabes, esperaré tu mensaje como usuario y jugador. Así mismo, el pago es único; si sale en funciones Premium en el futuro, ese pago contará como realizado para los usuarios que ya cancelen.
 Además, el proyecto está creciendo enormemente, lo que me está dando obviamente limitaciones al momento de agregar nuevas funciones y corregir errores que vayan surgiendo. Pero esto es totalmente voluntario; no se obliga a nadie, solo es una contribución que pueden dar según su voluntad para poder mejorar el proyecto y traerles nuevos modos de juego.
+Se corrigió el error de la espera de 3 minutos. Ahora es de 30 segundos después de iniciar la partida.
+Se añadieron nuevas cartas para los modos de juego desde el nivel 1 hasta el nivel 10, y del nivel 20 en adelante también.
 A continuación, actualiza para disfrutar.
-https://drive.usercontent.google.com/download?id=17lq4rU6tQQb7uP8b8lr5S6mF_8KEPHC6&export=download&confirm=t
+https://drive.usercontent.google.com/download?id=1ULeUzdNtXLrFsDSEq2PQAH7xYp4ptkNg&export=download&confirm=t
