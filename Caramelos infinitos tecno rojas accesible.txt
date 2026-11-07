@@ -1,30 +1,18 @@
-6/11/2026 12:30
-Versión anterior 1.7, versión actual 1.8
-Se añadió el modo de juego en línea por equipos de dos personas, ahora disponible para jugar, ya no con una máquina, sino con un usuario real.
-Esto está disponible en la pantalla principal a través de un botón llamado usuarios en línea.
-A su costado hay otro botón llamado bandeja.
-Se renombró el botón “Usuarios en línea”, ahora llamado “Partida en línea”.
-Dentro de este botón aparecen el botón usuarios en línea y el botón bandeja.
-Se añadió una forma adicional de partidas en línea.
-Al pulsar el botón “Usuarios en línea”, ahora te muestra dos opciones: partida individual o partida por niveles.
-La partida individual es una partida donde la mano no crece y solamente es una sola partida la que se juega con tu rival.
-La partida por niveles es la que se juega entre dos usuarios, como en la partida individual, pero aquí se cuentan 3 partidas para subir de nivel.
-Se modificó el panel de configuración para ordenar un poco más los botones, así ya no estarán sueltos.
-Ahora tenemos ordenadas las configuraciones de voz, sonido y vibración, así como descargas.
-Se añadió traducción al portugués y al inglés.
-El archivo se descarga automáticamente al ejecutar el juego.
-Si el dispositivo no está en uno de los idiomas que trae el archivo, te pide seleccionar tu idioma que puedas entender.
-Esta configuración también está disponible desde el panel de configuraciones.
-Las opciones de administrador de borrar estadísticas y de borrar comentarios, así como otras funciones, ahora ya no están visibles para cualquier usuario, a menos que yo lo decida.
-Se añadió la clasificación por top 100 del millón de caramelos y clasificación por países en el modo equipo.
-Esta nueva modalidad empieza desde cero. Los dos jugadores que jueguen se guardará su progreso en el servidor y las personas podrán ver con quiénes han hecho equipos y quién de los dos jugadores que ha hecho equipo va llevando la ventaja.
-Ahora los niveles van en aumento por nivel, según vayan avanzando.
-Se solucionaron otros errores con respecto a las cartas, así como también se aplicaron unas cartas adicionales. No son muchas, pero notarás la diferencia desde este nuevo juego.
-Se hicieron otras correcciones y mejoras con respecto a los cierres de los diálogos, así como a la interfaz principal, para cerrar correctamente el juego y no tener problemas.
-Te recuerdo que puedes dar una pequeña contribución contactándome desde el botón que está al final de las cartas, dentro de la tienda de cartas, para apoyar el proyecto y ayudarme a mejorar esto, porque se vienen cosas interesantes.
-Solo, si es tu voluntad, si deseas apoyar el proyecto, ya sabes, esperaré tu mensaje como usuario y jugador. Así mismo, el pago es único; si sale en funciones Premium en el futuro, ese pago contará como realizado para los usuarios que ya cancelen.
-Además, el proyecto está creciendo enormemente, lo que me está dando obviamente limitaciones al momento de agregar nuevas funciones y corregir errores que vayan surgiendo. Pero esto es totalmente voluntario; no se obliga a nadie, solo es una contribución que pueden dar según su voluntad para poder mejorar el proyecto y traerles nuevos modos de juego.
-Se corrigió el error de la espera de 3 minutos. Ahora es de 30 segundos después de iniciar la partida.
-Se añadieron nuevas cartas para los modos de juego desde el nivel 1 hasta el nivel 10, y del nivel 20 en adelante también.
-A continuación, actualiza para disfrutar.
-https://drive.usercontent.google.com/download?id=1ULeUzdNtXLrFsDSEq2PQAH7xYp4ptkNg&export=download&confirm=t
+7/11/2026 8:30
+
+Versión anterior 1.8, versión actual 1.9.
+Se modificaron las reglas de la carta Visita al dentista; actualmente, cuando el usuario usa esta carta en contra de la máquina, le hace perder 2500 caramelos; cuando el Bot utiliza esta carta en contra del usuario, solo le hace perder 300 caramelos.
+Se modificaron las reglas de la carta Plan Dental. Al usuario, actualmente, esta carta lo sigue protegiendo durante toda la partida. Cuando la máquina tiene activa esta carta, solamente lo protege durante 30 segundos; luego se desactiva. Tras 1 minuto de haberse desactivado, a la máquina le vuelve a aparecer esta carta nuevamente.
+Se modificaron las reglas de la carta Ladrón de caramelos: cuando esta carta es usada por el usuario a la máquina, le hace perder 900 caramelos, es decir, le roba 900 caramelos. Cuando la máquina usa esta carta en contra del usuario, sigue con las reglas que ya tenía, haciéndole perder una mínima cantidad.
+Se modificaron las reglas de la carta Impuesto Dulce. Cuando el usuario usa esta carta, le obliga a la máquina a darle 1500 caramelos. Cuando la máquina usa esta carta en contra del usuario, solo el usuario le entrega 300 caramelos.
+Esto solo es válido del nivel 20 para arriba, ya que de ahí en adelante es donde la máquina se pone más agresiva y más estratégica.
+Se modificaron las reglas de la espera de 30 segundos para cerrar el juego.
+Actualmente, esta regla solo es válida para usuarios gratuitos; para usuarios de pago no tendrán que esperar para cerrar la partida, podrán hacerlo en cualquier momento.
+Se agregó un cartel que le aparecerá al usuario que active la suscripción de pago, explicándole qué cartas tiene disponibles y cuáles son sus nuevas ventajas con respecto a las partidas.
+Obviamente, este cartel al usuario le aparecerá una sola vez.
+Por cierto, las modificaciones con respecto a las cartas son solo para el modo contra la máquina; para el modo en línea, las cartas siguen manteniendo su regla actual.
+Esto se quedará así, ya que, en el modo en línea, ya no estamos luchando contra una máquina, sino contra un usuario real; por lo que aquí sí debemos tener estrategia de juego.
+Les recuerdo que pueden dar una pequeña contribución contactándome a través del botón Comprar Premium, que se encuentra dentro de la tienda de cartas.
+Esta contribución me servirá para motivarme a traerles novedades en el juego, así como también a sostener el proyecto, ya que actualmente contamos con más de 200 000 caracteres en puro texto.
+Ahora sí actualiza para disfrutar.
+https://drive.usercontent.google.com/download?id=1vpuV91eaou9XCG31YovaHLjEaqJpEqhG&export=download&confirm=t
