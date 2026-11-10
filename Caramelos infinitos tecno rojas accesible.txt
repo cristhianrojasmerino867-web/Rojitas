@@ -1,18 +1,22 @@
-7/11/2026 8:30
+9/11/2026 20:30
 
-Versión anterior 1.8, versión actual 1.9.
-Se modificaron las reglas de la carta Visita al dentista; actualmente, cuando el usuario usa esta carta en contra de la máquina, le hace perder 2500 caramelos; cuando el Bot utiliza esta carta en contra del usuario, solo le hace perder 300 caramelos.
-Se modificaron las reglas de la carta Plan Dental. Al usuario, actualmente, esta carta lo sigue protegiendo durante toda la partida. Cuando la máquina tiene activa esta carta, solamente lo protege durante 30 segundos; luego se desactiva. Tras 1 minuto de haberse desactivado, a la máquina le vuelve a aparecer esta carta nuevamente.
-Se modificaron las reglas de la carta Ladrón de caramelos: cuando esta carta es usada por el usuario a la máquina, le hace perder 900 caramelos, es decir, le roba 900 caramelos. Cuando la máquina usa esta carta en contra del usuario, sigue con las reglas que ya tenía, haciéndole perder una mínima cantidad.
-Se modificaron las reglas de la carta Impuesto Dulce. Cuando el usuario usa esta carta, le obliga a la máquina a darle 1500 caramelos. Cuando la máquina usa esta carta en contra del usuario, solo el usuario le entrega 300 caramelos.
-Esto solo es válido del nivel 20 para arriba, ya que de ahí en adelante es donde la máquina se pone más agresiva y más estratégica.
-Se modificaron las reglas de la espera de 30 segundos para cerrar el juego.
-Actualmente, esta regla solo es válida para usuarios gratuitos; para usuarios de pago no tendrán que esperar para cerrar la partida, podrán hacerlo en cualquier momento.
-Se agregó un cartel que le aparecerá al usuario que active la suscripción de pago, explicándole qué cartas tiene disponibles y cuáles son sus nuevas ventajas con respecto a las partidas.
-Obviamente, este cartel al usuario le aparecerá una sola vez.
-Por cierto, las modificaciones con respecto a las cartas son solo para el modo contra la máquina; para el modo en línea, las cartas siguen manteniendo su regla actual.
-Esto se quedará así, ya que, en el modo en línea, ya no estamos luchando contra una máquina, sino contra un usuario real; por lo que aquí sí debemos tener estrategia de juego.
-Les recuerdo que pueden dar una pequeña contribución contactándome a través del botón Comprar Premium, que se encuentra dentro de la tienda de cartas.
-Esta contribución me servirá para motivarme a traerles novedades en el juego, así como también a sostener el proyecto, ya que actualmente contamos con más de 200 000 caracteres en puro texto.
-Ahora sí actualiza para disfrutar.
-https://drive.usercontent.google.com/download?id=1vpuV91eaou9XCG31YovaHLjEaqJpEqhG&export=download&confirm=t
+Versión anterior 1.9, versión actual 2.0.
+Se han hecho mejoras significativas e importantes para el funcionamiento del juego.
+Cambios que se realizaron con respecto a las cartas.
+Carta escudo y carta paraguas
+Cualquiera de ellas, que se active, o si se activan las dos, las demás copias desaparecen; cuando termina su función, en su turno que corresponde, vuelven a aparecer aleatoriamente en la mano de cartas.
+Esto se aplica tanto al modo en línea como al modo con el Bot.
+Ahora la limitación, tanto para el modo con el Bot como para el modo en línea, con respecto a las cartas, es de 25 cartas como máximo; es decir, a partir del nivel 20 ya la mano no vuelve a crecer.
+Se agregaron sonidos para las partidas ganadas, así como para las partidas que se pierden.
+Se agregó un sonido de un gato cuando te llega una invitación, por parte de otro usuario, para jugar en línea.
+En el modo en línea se agregó el modo apuesta; esto es referente únicamente a caramelos, es decir, se apuesta con caramelos, mínimo 500.
+Debo mencionar que está apuesta, sin importar el número que elijan; los dos jugadores deberán apostar con la misma cantidad. Por parte de ambos, si uno de los dos ingresa una cantidad diferente, no coincide.
+Posteriormente no se inicia la partida si la cantidad apostada por alguno de los dos es distinta.
+Mejoras importantes que se realizaron con respecto a las nuevas cuentas que se crean a partir de esta versión, incluso en las versiones futuras que vayan saliendo. Es decir, de ahora en adelante, las nuevas cuentas tienen un nuevo límite.
+A partir de esta versión, los usuarios que crean nuevas cuentas ya traerán la limitación de 30 días. Si, durante ese tiempo, esa cuenta nueva que se crea a partir de esta versión en adelante permanece inactiva, es decir, no recibe estadísticas, entonces automáticamente se elimina.
+Esto no aplica para las versiones que se crearon anteriores a esta última actualización.
+Lo que quiero decir es que las cuentas que fueron creadas antes de esta última actualización no tienen que preocuparse, ya que esta nueva regla para esas cuentas no será aplicada.
+También se añadió un nuevo modo de juego en la interfaz principal, que se llama Administración de Empresa. Este nuevo modo se desbloquea al pasar el millón de caramelos.
+Se añadió un cartel que les aparecerá a los usuarios cuando se les otorgue permiso Premium.
+Ahora sí puedes actualizar para disfrutar del juego.
+https://drive.usercontent.google.com/download?id=1LoUqFC_7CNnhmUZZ6EvRw2_jnCxA2SPd&export=download&confirm=t
