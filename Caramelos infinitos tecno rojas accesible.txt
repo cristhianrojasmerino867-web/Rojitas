@@ -1,4 +1,4 @@
-10/11/2026 14:00
+10/11/2026 18:30
 
 Versión anterior 2.0, versión actual 2.1.
 Se han hecho mejoras significativas e importantes para el funcionamiento del juego.
@@ -26,4 +26,4 @@ Lo que quiero decir es que las cuentas que fueron creadas antes de esta última 
 También se añadió un nuevo modo de juego en la interfaz principal, que se llama Administración de Empresa. Este nuevo modo se desbloquea al pasar el millón de caramelos.
 Se añadió un cartel que les aparecerá a los usuarios cuando se les otorgue permiso Premium.
 Ahora sí puedes actualizar para disfrutar del juego.
-https://drive.usercontent.google.com/download?id=1cYklayHN4wdqhRxSjyqEP2XXl6JcCJj6&export=download&confirm=t
+https://drive.usercontent.google.com/download?id=16eca7j0HBljhVCluJudEsZ1_UmYwPDgh&export=download&confirm=t
