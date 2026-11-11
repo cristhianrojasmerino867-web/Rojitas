@@ -1,29 +1,11 @@
-10/11/2026 18:30
+11/11/2026 8:30
 
-Versión anterior 2.0, versión actual 2.1.
-Se han hecho mejoras significativas e importantes para el funcionamiento del juego.
-Cambios que se realizaron con respecto a las cartas.
-Carta escudo y carta paraguas
-Cualquiera de ellas, que se active, o si se activan las dos, las demás copias desaparecen; cuando termina su función, en su turno que corresponde, vuelven a aparecer aleatoriamente en la mano de cartas.
-Esto se aplica tanto al modo en línea como al modo con el Bot.
-Ahora la limitación, tanto para el modo con el Bot como para el modo en línea, con respecto a las cartas, es de 25 cartas como máximo; es decir, a partir del nivel 20 ya la mano no vuelve a crecer.
-Se agregaron sonidos para las partidas ganadas, así como para las partidas que se pierden.
-Se agregó un sonido de un gato cuando te llega una invitación, por parte de otro usuario, para jugar en línea.
-En la versión del día de ayer, el sonido al recibir invitación se manejaba con el sonido de la interfaz principal. Si estaba activo, se escuchaba el sonido de invitación; si no, este sonido simplemente no aparecía.
-Es por eso que he aplicado la modificación del efecto de sonido a la configuración de sonido y vibración.
-Ahora, dentro de este apartado hay un botón que se llama sonido de notificación Al recibir invitaciones, por defecto viene activado.
-Este botón también cuenta con su barra deslizante para aumentar o disminuir el volumen del sonido.
-Les recuerdo que, para esto, sí o sí, tenemos que tener descargado el paquete de los sonidos.
-Para descargar el paquete, diríjanse a Configuración; posteriormente, a Descargas.
-Dentro de este apartado encontrarán el botón correspondiente para descargar los efectos de sonido. Si no descargaron el último paquete, que se actualizó el día de ayer, es importante que lo descarguen para que puedan escuchar el sonido de la notificación al momento de recibir una invitación por parte de un jugador.
-En el modo en línea se agregó el modo apuesta; esto es referente únicamente a caramelos, es decir, se apuesta con caramelos, mínimo 500.
-Debo mencionar que está apuesta, sin importar el número que elijan; los dos jugadores deberán apostar con la misma cantidad. Por parte de ambos, si uno de los dos ingresa una cantidad diferente, no coincide.
-Posteriormente no se inicia la partida si la cantidad apostada por alguno de los dos es distinta.
-Mejoras importantes que se realizaron con respecto a las nuevas cuentas que se crean a partir de esta versión, incluso en las versiones futuras que vayan saliendo. Es decir, de ahora en adelante, las nuevas cuentas tienen un nuevo límite.
-A partir de esta versión, los usuarios que crean nuevas cuentas ya traerán la limitación de 30 días. Si, durante ese tiempo, esa cuenta nueva que se crea a partir de esta versión en adelante permanece inactiva, es decir, no recibe estadísticas, entonces automáticamente se elimina.
-Esto no aplica para las versiones que se crearon anteriores a esta última actualización.
-Lo que quiero decir es que las cuentas que fueron creadas antes de esta última actualización no tienen que preocuparse, ya que esta nueva regla para esas cuentas no será aplicada.
-También se añadió un nuevo modo de juego en la interfaz principal, que se llama Administración de Empresa. Este nuevo modo se desbloquea al pasar el millón de caramelos.
-Se añadió un cartel que les aparecerá a los usuarios cuando se les otorgue permiso Premium.
+Versión anterior 2.1, versión actual 2.2
+Se integró el modo mantenimiento, que se estrena oficialmente a partir del día de hoy, 11 de noviembre. El próximo 11 de diciembre, el juego estará en modo mantenimiento, por lo que quedará inhabilitado durante ese día.
+El día de hoy no estaremos con el juego inhabilitado; digo que no estará inhabilitado porque el 11 de diciembre el juego será inhabilitado durante un día para poder limpiar ciertas cosas que se almacenan en el servidor, ya que esto requiere una limpieza cada cierto tiempo. Por lo mismo, que no estamos con una suscripción de pago, el servidor no es ilimitado.
+Para no saturarlo, voy a estar haciendo cierta limpieza cada cierto tiempo, por lo mismo, también porque están llegando nuevos jugadores.
+Para esto no deben preocuparse, puesto que, en el transcurso del mes, pondré una función la cual, un día antes, pueda notificarles de alguna manera que, el día siguiente que toca mantenimiento, el juego permanecerá inhabilitado.
+Si han leído esto, les recuerdo que el servidor no es totalmente ilimitado, por lo que requiere un mantenimiento cada cierto tiempo.
+Ahora sí, sin nada más que comentarles, que disfruten de esta actualización. Mis agradecimientos a las personas que han venido instalando el juego de la misma manera; también se les agradece a las personas que han estado dando su pequeña contribución por el enorme trabajo que se hace al desarrollar este juego y traerles nuevas funcionalidades.
 Ahora sí puedes actualizar para disfrutar del juego.
-https://drive.usercontent.google.com/download?id=16eca7j0HBljhVCluJudEsZ1_UmYwPDgh&export=download&confirm=t
+https://drive.usercontent.google.com/download?id=1F3YP40w-09JGjHGZxJp_6mVhBmVgMQhy&export=download&confirm=t
