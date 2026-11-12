@@ -1,4 +1,4 @@
-11/11/2026 8:30
+12/11/2026 8:30
 
 Versión anterior 2.1, versión actual 2.2
 Se integró el modo mantenimiento, que se estrena oficialmente a partir del día de hoy, 11 de noviembre. El próximo 11 de diciembre, el juego estará en modo mantenimiento, por lo que quedará inhabilitado durante ese día.
@@ -8,4 +8,4 @@ Para esto no deben preocuparse, puesto que, en el transcurso del mes, pondré un
 Si han leído esto, les recuerdo que el servidor no es totalmente ilimitado, por lo que requiere un mantenimiento cada cierto tiempo.
 Ahora sí, sin nada más que comentarles, que disfruten de esta actualización. Mis agradecimientos a las personas que han venido instalando el juego de la misma manera; también se les agradece a las personas que han estado dando su pequeña contribución por el enorme trabajo que se hace al desarrollar este juego y traerles nuevas funcionalidades.
 Ahora sí puedes actualizar para disfrutar del juego.
-https://drive.usercontent.google.com/download?id=1F3YP40w-09JGjHGZxJp_6mVhBmVgMQhy&export=download&confirm=t
+https://drive.usercontent.google.com/download?id=1_RWdOlnXzFWglgiJiIkviydkYqz5Y7_K&export=download&confirm=t
